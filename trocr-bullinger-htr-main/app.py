@@ -2,13 +2,11 @@ import gradio as gr
 import os
 from PIL import Image
 from transformers import TrOCRProcessor, VisionEncoderDecoderModel, AutoImageProcessor
-# import utils
 import base64
-# from datasets import load_metric
 import evaluate
 import logging
 
-# Only show log messages that are at the ERROR level or above, effectively filtering out any warnings
+# Only show log messages that are at the ERROR level or above
 logging.getLogger('transformers').setLevel(logging.ERROR)
 
 processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
@@ -16,210 +14,646 @@ image_processor = AutoImageProcessor.from_pretrained("pstroe/bullinger-general-m
 model = VisionEncoderDecoderModel.from_pretrained("pstroe/bullinger-general-model")
 
 # Create examples
-# Get images and respective transcriptions from the examples directory
 def get_example_data(folder_path="./examples/"):
-    
     example_data = []
-    
-    # Get list of all files in the folder
     all_files = os.listdir(folder_path)
     
-    # Loop through the file list
     for file_name in all_files:
-        
         file_path = os.path.join(folder_path, file_name)
         
-        # Check if the file is an image (.png)
         if file_name.endswith(".png"):
-            
-            # Construct the corresponding .txt filename (same name)
             corresponding_text_file_name = file_name.replace(".png", ".txt")
             corresponding_text_file_path = os.path.join(folder_path, corresponding_text_file_name)
-            
-            # Initialize to a default value
             transcription = "Transcription not found."
             
-            # Try to read the content from the .txt file
             try:
                 with open(corresponding_text_file_path, "r") as f:
                     transcription = f.read().strip()
             except FileNotFoundError:
-                pass  # If the corresponding .txt file is not found, leave the default value
+                pass
             
             example_data.append([file_path, transcription])
             
     return example_data
 
-# From pstroe's script
-def compute_metrics(pred):
-
-    labels_ids = pred.label_ids
-    pred_ids = pred.predictions
-
-    pred_str = processor.batch_decode(pred_ids, skip_special_tokens=True)
-    labels_ids[labels_ids == -100] = processor.tokenizer.pad_token_id
-    label_str = processor.batch_decode(labels_ids, skip_special_tokens=True)
-
-    cer = cer_metric.compute(predictions=pred_str, references=label_str)
-
-    return {"cer": cer}
-
 def process_image(image, ground_truth):
-
     cer = None
-
-    # prepare image
+    
+    # Prepare image
     pixel_values = image_processor(image, return_tensors="pt").pixel_values
-
-    # generate (no beam search)
+    
+    # Generate (no beam search)
     generated_ids = model.generate(pixel_values)
-
-    # decode
+    
+    # Decode
     generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
 
     if ground_truth is not None and ground_truth.strip() != "":
-
-        # Debug: Print lengths before computing metric
-        print("Number of predictions:", len(generated_text))
-        print("Number of references:", len(ground_truth))
-
-        # Check if lengths match
-        if len(generated_text) != len(ground_truth):
-
-            print("Mismatch in number of predictions and references.")
-            print("Predictions:", generated_text)
-            print("References:", ground_truth)
-            print("\n")
-
         cer = cer_metric.compute(predictions=[generated_text], references=[ground_truth])
-        # cer = f"{cer:.3f}"
-
     else:
-
         cer = "Ground truth not provided"
     
     return generated_text, cer
 
-# One way to use .svg files
-# logo_url = "https://www.bullinger-digital.ch/bullinger-digital.svg"
-# logo_url = "https://www.cl.uzh.ch/docroot/logos/uzh_logo_e_pos.svg"
-
-# header_html = "<img src='data:image/png;base64,{}' class='img-fluid' width='180px'>".format(
-#     utils.img_to_bytes(".uzh_logo_e_pos.svg")
-# )
-
-# Encode images
+# Encode logos
 with open("assets/uzh_logo_mod.png", "rb") as img_file:
     logo_html = base64.b64encode(img_file.read()).decode('utf-8')
 
-# with open("assets/bullinger-digital.png", "rb") as img_file:
 with open("assets/bullinger_logo.png", "rb") as img_file:
     footer_html = base64.b64encode(img_file.read()).decode('utf-8')
 
-# App header
-title = """
-    <h1 style='text-align: center'> Enhance Handwritten Text Recogition Using Transformers</p>
-"""
-
-description = """
-    Enhance Handwritten Text Recogition Using Transformers Based on Microsoft's [TrOCR], an encoder-decoder model consisting of an \
-    image Transformer encoder and a text Transformer decoder for state-of-the-art optical character recognition \
-    (OCR) and handwritten text recognition (HTR) on text line images. \
-    This particular model was fine-tuned on [Bullinger Dataset](https://github.com/pstroe/bullinger-htr) \
-    as part of the project [Bullinger Digital](https://www.bullinger-digital.ch).
-    [Flexible Techniques for Automatic Text Recognition of Historical Documents]
-"""
-
 examples = get_example_data()
-
-# load_metric() is deprecated
-# cer_metric = load_metric("cer")
-# pip install jiwer
-# pip install evaluate
 cer_metric = evaluate.load("cer")
 
-with gr.Blocks(
-    theme=gr.themes.Soft(),
-    title="TrOCR Bullinger",
-) as demo:
+# Custom CSS for enhanced UI
+custom_css = """
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap');
 
-    gr.HTML(
-        f"""
-        <div style='display: flex; justify-content: right; width: 100%;'>
-            <img src='data:image/png;base64,{logo_html}' class='img-fluid' width='200px'>
+:root {
+    --primary-color: #1a365d;
+    --secondary-color: #c53030;
+    --accent-color: #d69e2e;
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card-hover: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --success-color: #22c55e;
+    --gradient-1: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+    --gradient-2: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+}
+
+/* Main container styling */
+.gradio-container {
+    font-family: 'DM Sans', sans-serif !important;
+    background: var(--bg-dark) !important;
+    min-height: 100vh;
+}
+
+/* Custom background pattern */
+.gradio-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(26, 54, 93, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(197, 48, 48, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(214, 158, 46, 0.1) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.main {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header styling */
+.header-container {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem 2rem;
+    margin: -1rem -1rem 2rem -1rem;
+    border-radius: 12px;
+}
+
+.logo-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.logo-section img {
+    height: 70px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.logo-section img:hover {
+    transform: scale(1.05);
+}
+
+/* Title styling */
+.title-main {
+    font-family: 'Crimson Pro', serif !important;
+    font-size: 2.75rem !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 50%, #d69e2e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    margin: 0;
+    padding: 0.5rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 0.75rem;
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Description card */
+.description-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.description-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.description-card a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.description-card a:hover {
+    color: #eab308;
+    text-decoration: underline;
+}
+
+/* Feature badges */
+.feature-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    border-color: var(--accent-color);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+}
+
+.badge-icon {
+    font-size: 1.1rem;
+}
+
+/* Panel styling */
+.panel {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 16px !important;
+    padding: 1.5rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.panel:hover {
+    border-color: rgba(214, 158, 46, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Input/Output labels */
+label {
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* Image upload area */
+.image-container {
+    border: 2px dashed var(--border-color) !important;
+    border-radius: 12px !important;
+    background: rgba(30, 41, 59, 0.5) !important;
+    transition: all 0.3s ease !important;
+}
+
+.image-container:hover {
+    border-color: var(--accent-color) !important;
+    background: rgba(30, 41, 59, 0.8) !important;
+}
+
+/* Textboxes */
+textarea, input[type="text"] {
+    font-family: 'Crimson Pro', serif !important;
+    font-size: 1.1rem !important;
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 10px !important;
+    color: var(--text-primary) !important;
+    padding: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+textarea:focus, input[type="text"]:focus {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 3px rgba(214, 158, 46, 0.2) !important;
+    outline: none !important;
+}
+
+textarea::placeholder, input[type="text"]::placeholder {
+    color: var(--text-secondary) !important;
+    font-style: italic;
+}
+
+/* Buttons */
+button.primary {
+    background: var(--gradient-2) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 0.875rem 2rem !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    color: white !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+button.primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(197, 48, 48, 0.4) !important;
+}
+
+button.primary:active {
+    transform: translateY(0) !important;
+}
+
+button.secondary {
+    background: transparent !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: 10px !important;
+    padding: 0.75rem 1.5rem !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 500 !important;
+    color: var(--text-secondary) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+button.secondary:hover {
+    border-color: var(--text-primary) !important;
+    color: var(--text-primary) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Section headers */
+.section-header {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.section-header::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: var(--gradient-2);
+    border-radius: 2px;
+}
+
+/* Examples section */
+.examples-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.gallery {
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+/* CER output special styling */
+.cer-output {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem 0 1rem 0;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 3rem;
+}
+
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* How it works section */
+.how-it-works {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.step-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-color);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    margin: 0 auto 1rem auto;
+    font-size: 1.1rem;
+}
+
+.step-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.step-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .title-main {
+        font-size: 1.75rem !important;
+    }
+    
+    .logo-section img {
+        height: 50px;
+    }
+    
+    .feature-badges {
+        gap: 0.5rem;
+    }
+    
+    .badge {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+}
+"""
+
+# Custom theme for Gradio 6.x
+custom_theme = gr.themes.Base(
+    primary_hue="red",
+    secondary_hue="amber",
+    neutral_hue="slate",
+).set(
+    body_background_fill="#0f172a",
+    body_background_fill_dark="#0f172a",
+    block_background_fill="#1e293b",
+    block_background_fill_dark="#1e293b",
+    input_background_fill="#0f172a",
+    input_background_fill_dark="#0f172a",
+    button_primary_background_fill="#c53030",
+    button_primary_background_fill_hover="#9b2c2c",
+)
+
+# Build the Gradio interface
+with gr.Blocks(title="HTR Transformer - Handwritten Text Recognition") as demo:
+    
+    # Header section with logos
+    gr.HTML(f"""
+        <div class="header-container">
+            <div class="logo-section">
+                <img src='data:image/png;base64,{logo_html}' alt="University Logo">
+                <img src='data:image/png;base64,{footer_html}' alt="Project Logo">
+            </div>
+            <h1 class="title-main">✨ Handwritten Text Recognition</h1>
+            <p class="subtitle">Powered by Transformer Models & Large Language Models</p>
         </div>
-        """
+    """)
+    
+    # Feature badges
+    gr.HTML("""
+        <div class="feature-badges">
+            <span class="badge"><span class="badge-icon">🔬</span> TrOCR Architecture</span>
+            <span class="badge"><span class="badge-icon">📜</span> Historical Documents</span>
+            <span class="badge"><span class="badge-icon">🎯</span> High Accuracy</span>
+            <span class="badge"><span class="badge-icon">⚡</span> Real-time Processing</span>
+        </div>
+    """)
+    
+    # Description card
+    gr.HTML("""
+        <div class="description-card">
+            <p>
+                This application leverages <strong>Microsoft's TrOCR</strong> — a state-of-the-art encoder-decoder model 
+                combining an <em>image Transformer encoder</em> with a <em>text Transformer decoder</em> for exceptional 
+                optical character recognition (OCR) and handwritten text recognition (HTR). 
+                The model has been fine-tuned on the <a href="https://github.com/pstroe/bullinger-htr" target="_blank">Bullinger Dataset</a> 
+                as part of the <a href="https://www.bullinger-digital.ch" target="_blank">Bullinger Digital</a> project, 
+                enabling accurate transcription of historical handwritten documents.
+            </p>
+        </div>
+    """)
+    
+    # How it works section
+    gr.HTML("""
+        <div class="how-it-works">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-title">Upload Image</div>
+                <div class="step-desc">Select or drag a handwritten text line image</div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-title">Process</div>
+                <div class="step-desc">Transformer analyzes the handwriting patterns</div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-title">Transcribe</div>
+                <div class="step-desc">Get accurate text transcription instantly</div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-title">Evaluate</div>
+                <div class="step-desc">Compare with ground truth using CER metric</div>
+            </div>
+        </div>
+    """)
+    
+    # Main content area
+    with gr.Row(equal_height=True):
+        # Input column
+        with gr.Column(scale=1):
+            gr.HTML('<div class="section-header">Input</div>')
+            input_image = gr.Image(
+                type="pil", 
+                label="📷 Upload Handwritten Text Image",
+                elem_classes=["image-container"]
+            )
+            
+            with gr.Row():
+                btn_clear = gr.Button(
+                    "🗑️ Clear", 
+                    variant="secondary",
+                    elem_classes=["secondary"]
+                )
+                btn_submit = gr.Button(
+                    "🚀 Recognize Text", 
+                    variant="primary",
+                    elem_classes=["primary"]
+                )
+        
+        # Output column
+        with gr.Column(scale=1):
+            gr.HTML('<div class="section-header">Results</div>')
+            output_text = gr.Textbox(
+                label="📝 Recognized Text",
+                placeholder="Transcription will appear here...",
+                lines=3,
+                interactive=False
+            )
+            ground_truth = gr.Textbox(
+                label="📋 Ground Truth (Optional)",
+                placeholder="Enter the actual text to calculate Character Error Rate...",
+                lines=2
+            )
+            cer_output = gr.Textbox(
+                label="📊 Character Error Rate (CER)",
+                placeholder="CER score will appear here...",
+                lines=1,
+                interactive=False,
+                elem_classes=["cer-output"]
+            )
+    
+    # Examples section
+    gr.HTML('<div class="section-header" style="margin-top: 2rem;">Sample Images</div>')
+    
+    with gr.Accordion("📚 Click to view example images from test set", open=False):
+        gr.Examples(
+            examples=examples,
+            inputs=[input_image, ground_truth],
+            label=None,
+            examples_per_page=4
+        )
+    
+    # Footer
+    gr.HTML("""
+        <div class="footer">
+            <p>
+                <strong>Enhancing Handwritten Text Recognition Using Transformer Models</strong><br>
+                Built with 🤗 Transformers & Gradio | 
+                <a href="https://huggingface.co/pstroe/bullinger-general-model" target="_blank">Model Card</a> | 
+                <a href="https://doi.org/10.5167/uzh-234886" target="_blank">Research Paper</a>
+            </p>
+        </div>
+    """)
+    
+    # Event handlers
+    btn_submit.click(
+        process_image, 
+        inputs=[input_image, ground_truth], 
+        outputs=[output_text, cer_output]
+    )
+    
+    btn_clear.click(
+        lambda: [None, "", "", ""], 
+        outputs=[input_image, output_text, ground_truth, cer_output]
     )
 
-    #174x60
-
-    title = gr.HTML(title)
-    description = gr.Markdown(description)
-
-    with gr.Row():
-
-        with gr.Column(variant="panel"):
-
-            input = gr.components.Image(type="pil", label="Input image:")
-
-            with gr.Row():
-
-                btn_clear = gr.Button(value="Clear")
-                button = gr.Button(value="Submit")
-
-        with gr.Column(variant="panel"):
-
-            output = gr.components.Textbox(label="Generated text:")
-            ground_truth = gr.components.Textbox(value="", placeholder="Provide the ground truth, if available.", label="Ground truth:")
-            cer_output = gr.components.Textbox(label="CER:")
-
-    with gr.Row():
-
-        # with gr.Accordion(label="Choose an example from test set:", open=False):
-            
-            # gr.Examples(
-            #     examples=examples,
-            #     inputs = [input, ground_truth],
-            #     label=None,
-            # )
-
-    # with gr.Row():
-
-        # gr.HTML(
-        #     f"""
-        #     <div style="display: flex; align-items: center; justify-content: center">
-        #         <img src="data:image/png;base64,{footer_html}" style="width: 150px; height: 60px; object-fit: contain; margin-right: 5px; margin-bottom: 5px">
-        #         <p style="font-size: 13px">
-        #             Bullinger Digital | Institut für Computerlinguistik, Universität Zürich, 2023
-        #         </p>
-        #     </div>
-        #     """
-        # )
-        gr.HTML(
-            f"""
-            <div style="display: flex; align-items: center; justify-content: center">
-                <p style="font-size: 13px">
-                </p>
-            </div>
-            """
-        )
-
-    #383x85
-
-    button.click(process_image, inputs=[input, ground_truth], outputs=[output, cer_output])
-    btn_clear.click(lambda: [None, "", "", ""], outputs=[input, output, ground_truth, cer_output])
-
-    # Try to force light mode
-    js = """
-        function () {
-            gradioURL = window.location.href
-            if (!gradioURL.endsWith('?__theme=light')) {
-                window.location.replace(gradioURL + '?__theme=light');
-        }
-    }"""
-
-    demo.load(_js=js)
-
 if __name__ == "__main__":
-
-    demo.launch(favicon_path="assets/bullinger_logo.png")
+    demo.launch(
+        favicon_path="assets/bullinger_logo.png",
+        share=False,
+        theme=custom_theme,
+        css=custom_css
+    )
