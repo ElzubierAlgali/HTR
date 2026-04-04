@@ -74,24 +74,39 @@ custom_css = """
     --secondary-color: #c53030;
     --accent-color: #d69e2e;
     --bg-dark: #0f172a;
-    --bg-card: #1e293b;
-    --bg-card-hover: #334155;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --border-color: #334155;
+    --bg-light: #f8fafc;
+    --bg-card-dark: #1e293b;
+    --bg-card-light: #ffffff;
+    --bg-card-hover-dark: #334155;
+    --bg-card-hover-light: #f1f5f9;
+    --text-primary-dark: #f1f5f9;
+    --text-primary-light: #1e293b;
+    --text-secondary-dark: #94a3b8;
+    --text-secondary-light: #64748b;
+    --border-color-dark: #334155;
+    --border-color-light: #e2e8f0;
     --success-color: #22c55e;
     --gradient-1: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
     --gradient-2: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+    
+    /* Default to light theme */
+    --bg-main: var(--bg-light);
+    --bg-card: var(--bg-card-light);
+    --bg-card-hover: var(--bg-card-hover-light);
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --border-color: var(--border-color-light);
 }
 
 /* Main container styling */
 .gradio-container {
     font-family: 'DM Sans', sans-serif !important;
-    background: var(--bg-dark) !important;
+    background: var(--bg-main) !important;
     min-height: 100vh;
+    color: var(--text-primary) !important;
 }
 
-/* Custom background pattern */
+/* Custom background pattern - Light theme */
 .gradio-container::before {
     content: '';
     position: fixed;
@@ -100,9 +115,9 @@ custom_css = """
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(26, 54, 93, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(197, 48, 48, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(214, 158, 46, 0.1) 0%, transparent 30%);
+        radial-gradient(circle at 20% 80%, rgba(26, 54, 93, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(197, 48, 48, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(214, 158, 46, 0.04) 0%, transparent 30%);
     pointer-events: none;
     z-index: 0;
 }
@@ -114,7 +129,7 @@ custom_css = """
 
 /* Header styling */
 .header-container {
-    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.8) 100%);
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.9) 100%);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     padding: 1.5rem 2rem;
@@ -270,20 +285,20 @@ label {
 .image-container {
     border: 2px dashed var(--border-color) !important;
     border-radius: 12px !important;
-    background: rgba(30, 41, 59, 0.5) !important;
+    background: rgba(248, 250, 252, 0.8) !important;
     transition: all 0.3s ease !important;
 }
 
 .image-container:hover {
     border-color: var(--accent-color) !important;
-    background: rgba(30, 41, 59, 0.8) !important;
+    background: rgba(248, 250, 252, 1) !important;
 }
 
 /* Textboxes */
 textarea, input[type="text"] {
     font-family: 'Crimson Pro', serif !important;
     font-size: 1.1rem !important;
-    background: rgba(15, 23, 42, 0.6) !important;
+    background: rgba(248, 250, 252, 0.9) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: 10px !important;
     color: var(--text-primary) !important;
@@ -456,7 +471,7 @@ button.secondary:hover {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-dark);
+    background: var(--bg-light);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -487,6 +502,47 @@ button.secondary:hover {
         font-size: 0.75rem;
     }
 }
+
+/* Theme switching based on system preference */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-main: var(--bg-dark);
+        --bg-card: var(--bg-card-dark);
+        --bg-card-hover: var(--bg-card-hover-dark);
+        --text-primary: var(--text-primary-dark);
+        --text-secondary: var(--text-secondary-dark);
+        --border-color: var(--border-color-dark);
+    }
+    
+    /* Custom background pattern - Dark theme */
+    .gradio-container::before {
+        background: 
+            radial-gradient(circle at 20% 80%, rgba(26, 54, 93, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(197, 48, 48, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(214, 158, 46, 0.1) 0%, transparent 30%) !important;
+    }
+    
+    /* Dark theme overrides */
+    .image-container {
+        background: rgba(30, 41, 59, 0.5) !important;
+    }
+    
+    .image-container:hover {
+        background: rgba(30, 41, 59, 0.8) !important;
+    }
+    
+    textarea, input[type="text"] {
+        background: rgba(15, 23, 42, 0.6) !important;
+    }
+    
+    .header-container {
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.8) 100%) !important;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: var(--bg-dark) !important;
+    }
+}
 """
 
 # Custom theme for Gradio 6.x
@@ -495,12 +551,12 @@ custom_theme = gr.themes.Base(
     secondary_hue="amber",
     neutral_hue="slate",
 ).set(
-    body_background_fill="#0f172a",
-    body_background_fill_dark="#0f172a",
-    block_background_fill="#1e293b",
-    block_background_fill_dark="#1e293b",
-    input_background_fill="#0f172a",
-    input_background_fill_dark="#0f172a",
+    body_background_fill="transparent",
+    body_background_fill_dark="transparent",
+    block_background_fill="transparent",
+    block_background_fill_dark="transparent",
+    input_background_fill="transparent",
+    input_background_fill_dark="transparent",
     button_primary_background_fill="#c53030",
     button_primary_background_fill_hover="#9b2c2c",
 )
