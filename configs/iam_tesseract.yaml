@@ -1,0 +1,7 @@
+run_id: iam_tesseract
+checkpoint: tesseract
+split_dir: data/iam/processed/test
+output_dir: experiments
+batch_size: 1
+backend: tesseract
+seed: 42

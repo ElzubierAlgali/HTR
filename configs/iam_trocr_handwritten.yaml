@@ -1,0 +1,8 @@
+run_id: iam_trocr_handwritten
+checkpoint: microsoft/trocr-base-handwritten
+split_dir: data/iam/processed/test
+output_dir: experiments
+batch_size: 8
+max_samples: 200
+backend: trocr
+seed: 42

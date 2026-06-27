@@ -1,0 +1,185 @@
+from __future__ import annotations
+
+import csv
+import json
+import shutil
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Any
+
+import torch
+from PIL import Image
+from torch.utils.data import DataLoader, Dataset
+
+from .metrics import compute_cer, compute_wer, per_sample_cer, summarize_errors
+from .models import ModelBundle, load_model_bundle
+
+
+@dataclass
+class EvalConfig:
+    run_id: str
+    checkpoint: str
+    split_dir: Path
+    output_dir: Path
+    batch_size: int = 8
+    max_samples: int | None = None
+    backend: str = "trocr"  # trocr | tesseract
+    seed: int = 42
+
+
+class LineDataset(Dataset):
+    def __init__(self, split_dir: Path, max_samples: int | None = None):
+        self.images_dir = split_dir / "images"
+        labels_path = split_dir / "labels.csv"
+        if not labels_path.exists():
+            raise FileNotFoundError(f"Missing labels file: {labels_path}")
+
+        self.samples: list[tuple[str, str]] = []
+        with open(labels_path, newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                filename = row["filename"]
+                text = row["transcription"]
+                image_path = self.images_dir / filename
+                if image_path.exists():
+                    self.samples.append((str(image_path), text))
+
+        if max_samples is not None:
+            self.samples = self.samples[:max_samples]
+
+    def __len__(self) -> int:
+        return len(self.samples)
+
+    def __getitem__(self, idx: int) -> dict[str, Any]:
+        path, text = self.samples[idx]
+        return {"path": path, "reference": text, "idx": idx}
+
+
+def _collate(batch: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return batch
+
+
+def _predict_tesseract(image_path: str) -> str:
+    import shutil
+
+    import pytesseract
+
+    if shutil.which("tesseract") is None:
+        raise RuntimeError(
+            "Tesseract binary not found. Install with: sudo apt install tesseract-ocr"
+        )
+
+    image = Image.open(image_path).convert("RGB")
+    return pytesseract.image_to_string(image, config="--psm 7").strip()
+
+
+@torch.no_grad()
+def _predict_trocr_batch(bundle: ModelBundle, image_paths: list[str]) -> list[str]:
+    images = [Image.open(p).convert("RGB") for p in image_paths]
+    return bundle.generate_batch(images)
+
+
+def run_evaluation(config: EvalConfig) -> dict[str, Any]:
+    torch.manual_seed(config.seed)
+    output_dir = config.output_dir / config.run_id
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    if config.backend == "tesseract":
+        import shutil
+
+        if shutil.which("tesseract") is None:
+            metrics = {
+                "run_id": config.run_id,
+                "status": "skipped",
+                "reason": "Tesseract binary not installed (sudo apt install tesseract-ocr)",
+                "backend": "tesseract",
+            }
+            with open(output_dir / "metrics.json", "w", encoding="utf-8") as f:
+                json.dump(metrics, f, indent=2)
+            (output_dir / "README.md").write_text(
+                "# Skipped\n\nInstall Tesseract: `sudo apt install tesseract-ocr`\n",
+                encoding="utf-8",
+            )
+            return metrics
+
+    dataset = LineDataset(config.split_dir, config.max_samples)
+    if len(dataset) == 0:
+        raise ValueError(f"No samples found in {config.split_dir}")
+
+    bundle = None
+    if config.backend == "trocr":
+        bundle = load_model_bundle(config.checkpoint)
+
+    predictions: list[str] = []
+    references: list[str] = []
+    rows: list[dict[str, Any]] = []
+
+    dataloader = DataLoader(
+        dataset,
+        batch_size=config.batch_size,
+        shuffle=False,
+        collate_fn=_collate,
+    )
+
+    for batch_idx, batch in enumerate(dataloader):
+        paths = [item["path"] for item in batch]
+        refs = [item["reference"] for item in batch]
+
+        if config.backend == "trocr":
+            assert bundle is not None
+            preds = _predict_trocr_batch(bundle, paths)
+        elif config.backend == "tesseract":
+            preds = [_predict_tesseract(p) for p in paths]
+        else:
+            raise ValueError(f"Unknown backend: {config.backend}")
+
+        for path, ref, pred in zip(paths, refs, preds):
+            predictions.append(pred)
+            references.append(ref)
+            rows.append(
+                {
+                    "filename": Path(path).name,
+                    "reference": ref,
+                    "prediction": pred,
+                    "cer": per_sample_cer(pred, ref),
+                }
+            )
+
+        if (batch_idx + 1) % 10 == 0:
+            print(f"  [{config.run_id}] {len(predictions)}/{len(dataset)} lines", flush=True)
+
+    metrics = {
+        "run_id": config.run_id,
+        "checkpoint": config.checkpoint,
+        "backend": config.backend,
+        "n_samples": len(predictions),
+        "cer": compute_cer(predictions, references),
+        "wer": compute_wer(predictions, references),
+        "split_dir": str(config.split_dir),
+    }
+
+    with open(output_dir / "config.json", "w", encoding="utf-8") as f:
+        json.dump(asdict(config), f, indent=2, default=str)
+
+    with open(output_dir / "metrics.json", "w", encoding="utf-8") as f:
+        json.dump(metrics, f, indent=2)
+
+    with open(output_dir / "predictions.csv", "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["filename", "reference", "prediction", "cer"])
+        writer.writeheader()
+        writer.writerows(rows)
+
+    error_summary = summarize_errors(predictions, references)
+    with open(output_dir / "error_summary.json", "w", encoding="utf-8") as f:
+        json.dump(error_summary, f, indent=2)
+
+    readme = (
+        f"# {config.run_id}\n\n"
+        f"Reproduce:\n\n"
+        f"```bash\n"
+        f"python scripts/run_eval.py --config configs/{config.run_id}.yaml\n"
+        f"```\n"
+    )
+    (output_dir / "README.md").write_text(readme, encoding="utf-8")
+
+    return metrics

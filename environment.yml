@@ -1,0 +1,25 @@
+name: htr
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch
+  - torchvision
+  - cpuonly
+  - pip
+  - pip:
+      - transformers>=4.33.0
+      - pillow>=9.4.0
+      - jiwer>=3.0.0
+      - evaluate>=0.4.0
+      - gradio>=4.0.0
+      - pyyaml>=6.0
+      - pandas>=2.0.0
+      - datasets>=2.14.0
+      - pyarrow>=14.0.0
+      - matplotlib>=3.7.0
+      - pytesseract>=0.3.10
+      - huggingface_hub>=0.20.0
+      - sentencepiece>=0.1.99
