@@ -1,5 +1,18 @@
 from __future__ import annotations
 
+if __name__ == "__main__" and __package__ is None:
+    import subprocess
+    import sys
+    from pathlib import Path
+
+    repo_root = Path(__file__).resolve().parents[2]
+    script = repo_root / "scripts" / "run_eval.py"
+    if len(sys.argv) == 1:
+        print("Usage: python3 scripts/run_eval.py --config configs/<name>.yaml")
+        print("Example: python3 scripts/run_eval.py --config configs/iam_trocr_handwritten.yaml")
+        raise SystemExit(1)
+    raise SystemExit(subprocess.call([sys.executable, str(script), *sys.argv[1:]]))
+
 import csv
 import json
 import shutil
