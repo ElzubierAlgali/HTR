@@ -1,0 +1,201 @@
+filename,reference,prediction,cer
+test_000000.png,"assuredness "" Bella Bella Marie "" ( Parlophone ) , a lively song that changes tempo mid-way .","assurdress bella bello Marie (Carlophone) a Lhelii suam, quod coniuge, tempore mihi",0.44086021505376344
+test_000001.png,"I don't think he will storm the charts with this one , but it 's a good start .","dominum, ne vill storum, the charis vili, his one, ocul ist a quod start.",0.4050632911392405
+test_000002.png,"CHRIS CHARLES , 39 , who lives in Stockton-on-Tees , is an accountant .","Christus charies, 29, ulto iuves in Stoculon, omnes, is an accolant.",0.49295774647887325
+test_000003.png,Become a success with a disc and hey presto ! You 're a star ... . Rolly sings with,"Recome a success vidi a diese apud neque presso. Vor re a suarum, Rollus, sings, an",0.39759036144578314
+test_000004.png,"Tolch , as he is known in Tin Pan Alley , likes songs with a month in the title . He wrote","solch, es hae is unouen in Tim, alleus, sivei sonei sonti a moniti in me, dille. He werde",0.3888888888888889
+test_000005.png,""" My September Love , "" the big David Whitfield hit of 1956 .","septemper love, huius pius David Nihi voleid, hoc 1556.",0.5081967213114754
+test_000006.png,He is also a director of a couple of garages . And he finds time as well to be a lyric,"also a director, quod a couple et sproges. Quod te suos, iure ob acello be a hic",0.43023255813953487
+test_000007.png,"writer . He writes with Tolchard Evans , composer of "" Lady of Spain "" and other big hits .","anter, ne uriles vulti Dolehard, Dions, compater, etc. Iadii omnes, olim, und aber pius illis",0.5714285714285714
+test_000008.png,"The numbers include "" Scotland the Brave , "" "" Men of Harlech , """,die ympers incinde Scotland ille eräre? Mey o. Hardein,0.46153846153846156
+test_000009.png,"Fay Compton stars in "" No Hiding Place "" (I T V , 9.35 p.m. ) .","kay, coupton, stare in von Hidius (lacem“. Item, qu35.",0.5079365079365079
+test_000010.png,She plays the possessive mother of a man whose hobby revolves,"sine plagis tua possissire mathec, et a man uliose habui, cero,",0.4426229508196721
+test_000011.png,round a doll's house .,wurd a doll d. Leone.,0.5
+test_000012.png,"THREE people will be hypnotised in tonight's "" Lifeline ""","herr prople, wil be lußhonstel in coniglis Liteligen",0.45614035087719296
+test_000013.png,"( B B C , 10.15 ) .",Co. 1535.,0.7368421052631579
+test_000014.png,""" McNamara's Band , "" "" Greensleeves "" and "" English Rose . ""","Ne Vamergis pavid, praeceiis deeres, apud Zugdisti, lose?",0.6557377049180327
+test_000015.png,of Rhodesia and Nyasaland ( 10.30 p.m. ) .,et Rhodesia aud Maycasaland (10 30. g. m.,0.3333333333333333
+test_000016.png,They will be asked to comment on the design of everyday articles,"Null be essend, to commeis, on me design, odergangen articleses",0.4375
+test_000017.png,"playwright Arnold Wesker . "" Instead , Muggeridge's appointment","plausurigliche, Achola Wester. Iustend, Mygerioge s, abspingen,",0.4603174603174603
+test_000018.png,such as a chair and a motor-car . The idea is to see what happens when,"sich a chari apud a votos caussas. The ideo isto se, una prope iis, utram",0.4857142857142857
+test_000019.png,will be with Sir Roy Welensky the Premier of the Federation,"will be with, sic koy welen sij ire, sseinier et tue te der alten",0.4067796610169492
+test_000020.png,parts of the mind not normally available without hypnosis are used .,"paris, ut ne apud non non non hospitalii avadetie, ut, ut hoc huius proposis, ac est ascendere,",0.8529411764705882
+test_000021.png,"I T V have postponed Malcolm Muggeridge's "" Appointment with","Tu habe, quod ad quodam Maggeriose s. Appo igiitur,",0.6166666666666667
+test_000022.png,"success last night in I T V's "" Private Potter , "" his","success legt, beglt zuͦ Ts. Pietate, pater, vir",0.5
+test_000023.png,man could only be regarded as a machine .,"calloquii, begrede et a Werdinensibus",0.7073170731707317
+test_000024.png,"date . "" ACTOR Tom Courtenay was an outstanding","Accem Tui Cantenarii, vos, cui optandum",0.723404255319149
+test_000025.png,the switch because of the topicality of African,"me subituli brevisse, ut tue togicelli, ut Rhiccius",0.6170212765957447
+test_000026.png,essay on soldiering which stated that a fighting,"cum sollicitius, aliudie stereo, tua et dignitudinem",0.75
+test_000027.png,"Say Granada T V , the producers : "" We decided to make","sarii gravata tu, He, praelucers, ne decedeo, te male",0.5
+test_000028.png,first big T V part . The play was a brilliantly-written,atque tu post. The glerii mei et bibliant.,0.6545454545454545
+test_000029.png,affairs . The Wesker interview will be seen at a later,certavis. Ille vester Luteriensem ad illud hoc saecum et a Verter,0.6481481481481481
+test_000030.png,"craggy face , and obstinate , baffled eyes . They stripped","Greggii, habe, quid obstinante, Basileae ejes, meli strippedi",0.4482758620689655
+test_000031.png,claimed he had seen a vision of God - only the padre and his,"abhibeo, bellum scerni et visionum, ut, quod iulii a te studie, quid his",0.6666666666666666
+test_000032.png,"Potter screamed during an action , and was arrested . He","Poter, scolampad durius, cum certum, quid vos arresteam.",0.5
+test_000033.png,"him of his ugly battle-dress , to leave him for","libri, ut vos Anglię hostile dicas, te Leone, bene et",0.723404255319149
+test_000034.png,vision .,dominum,0.75
+test_000035.png,"what he was - Potter , a frightened boy who had a","vellet, je res. Eter, a consulto vel has alio, quod ei",0.7551020408163265
+test_000036.png,"C O believed him . Courtenay played the part with a gawky ,","libri. Captenerum, plane tua, ut parte, ut tibi a quibus",0.7627118644067796
+test_000037.png,Northern defiance . The cameras played continuously on his,"Nornnem deficie. Te cameras placet continuosibus, cum his",0.3275862068965517
+test_000038.png,to the European Common Market .,"me Eurogeantem, common Marvetiensis",0.5806451612903226
+test_000039.png,"scene , ranging from pubs , the Eton wall game ,","sane, langling, from pubsthe, eten woll gantne,",0.3541666666666667
+test_000040.png,"Dennis Brogan , Shelagh Delaney , and Alan Sillitoe .","Henrico Brogan, theologum Delaneus und Asken, si",0.5094339622641509
+test_000041.png,"The film replaced "" What 's My Line ? "" and "" Be My","The filium repleced, whals my Line? And Pellus",0.4117647058823529
+test_000042.png,British personalities . Among them - Professor,"Britisch, personalities, amone thermam, professor",0.2391304347826087
+test_000043.png,The film covered a wide aspect of the British,"The filium carered a a a fide aspect et tie, utili",0.4
+test_000044.png,"Guest "" programmes because of an electricians'","Grest, progrannes Beccusem et an electriciens",0.2608695652173913
+test_000045.png,"of an American T V reporter , Eric Sevareid , and","et anmericam, tuam reporter, Eric Seiareid, quod",0.32653061224489793
+test_000046.png,strike . It showed Britain today through the eyes,"stribe. A schower britein toder throuch, the eges",0.2653061224489796
+test_000047.png,Britain was slipping behind ... .,"Britaeien, was Siepping, Belind.",0.42424242424242425
+test_000048.png,to make the strongest criticisms . He said,"male tue strongest criticismis. He, scribe",0.2857142857142857
+test_000049.png,Shelagh Delaney and Alan Sillitoe attacked,"Sheleich, delectres und allen, si blibere, affaceretur",0.6904761904761905
+test_000050.png,"that in the race of the modern nations ,",quod in me reice offhe moderni nationis,0.35
+test_000051.png,education . It was left to reporter Sevareid,"education. It eas lest to, reporter, severio",0.20454545454545456
+test_000052.png,other chums sniffing the wind and,"chuius iniiffitius, sic vino apud",0.6666666666666666
+test_000053.png,offering to drop by for a chat .,"officius, dominus tui hoc a Christi",0.6875
+test_000054.png,arrived two hours earlier by appointment,"accilio, imo huius ecclesiae apponui.",0.6
+test_000055.png,to talk to the author of Borstal Boy and,"Iam a te ille author et Bernata. Bequi, quid",0.6
+test_000056.png,"The Hostage about his new work , if any ,","nomine abortant, lice, lievi morte, istam",0.7560975609756098
+test_000057.png,and who is now being pluckily convivial,alio in hori Beitius solicitus convivi,0.5897435897435898
+test_000058.png,"has rung a couple of times , calls from","literas, cuius a console et hinco, calle fraudum",0.6410256410256411
+test_000059.png,to fight off the frustration . The telephone,"figli, ossit ille impetratori. Ille lectione",0.6363636363636364
+test_000060.png,ALSO present is a London journalist who,"Algo, soccerentur, etc. a Londoni Zoucius, libro",0.717948717948718
+test_000061.png,the Synoptics can be reasonably solved by paying due regard to the time and,"Mihi synopies, an de concionibus colendibus, partius alios, Megandri, dole, done,",0.6666666666666666
+test_000062.png,"plan and to the different public for which , or against which , the author wrote .","plus, quod te difficeat publice hoc adiuncti omni agninet aedicti et caussos aetoli.",0.573170731707317
+test_000063.png,The third article excluded any allegorical interpretation of the Gospel .,"Ilicquid, articulo, excludendum, quum adlegor, cal in hipietatione ad te causa.",0.5068493150684932
+test_000064.png,The second said that the problems which arise from the comparisons with,"Ne concond, scird, mit de publicos, utlich ance from, ili comparicans, willo,",0.5211267605633803
+test_000065.png,Fourth Gospel by explanations based on assumed textual dislocations . The,"Favell, hospel by explamthons, brecul an obscure vel deiuval Melanchtonem.",0.5753424657534246
+test_000066.png,There is a whole group of theories which attempt to explain the problems of the,"llece; is aetolore quapropter, atque adiunt, attempto, experio, tibi publicis ad te",0.620253164556962
+test_000067.png,"could of the chaos by placing the fragments , or sheets , or pages , in order .","cordi, ut liberos, by Ploriaque, ab Haynensis ac electe ac Pages, in octobris",0.620253164556962
+test_000068.png,present state of the Gospel is the result of an accident-prone history . The,"parant studi, ut ille semel is, si occultum olim occideat, pene historiam. Ne",0.5394736842105263
+test_000069.png,"accidentally damaged . An editor , who was not the author , made what he","excluduillis clamaged, in aeditos, alo aeris nobis, ne quatuos, nihil nihil",0.6527777777777778
+test_000070.png,"original was written on a roll , or codex , which fell into disorder or was","cupicul coenae aetellen, an a Gall, an cordo, ob id sell, isto discordior omnes",0.5733333333333334
+test_000071.png,showing that such changes are part of a,"schoring, that sich changes, que partem, ut a",0.3076923076923077
+test_000072.png,how this enlargement was effected nor has he,"höw, his eulge meit, was esseckt, not has he",0.3409090909090909
+test_000073.png,The one real weakness of the Commentator's,"The one real, realem et ne commentatores",0.2857142857142857
+test_000074.png,this is possible it is necessary to examine the,"is possibile, ut is necessarii, te examine,",0.3404255319148936
+test_000075.png,"he has not , until now , been able to exhibit exactly","he has not, nihil novi, heen cive, te exhibit, exactly",0.24528301886792453
+test_000076.png,been able to explain the textual movements by,"habe, te explain tue textual, movements",0.28888888888888886
+test_000077.png,"case is that , in common with all his colleagues ,","caese is fiat, in communi willi cum his calleaques,",0.3
+test_000078.png,text of the Gospel .,et ne Gospel.,0.4
+test_000079.png,simple and coherent plan . To understand how,"simple, quid coherent plan. 70 understand, hoch",0.22727272727272727
+test_000080.png,wording . It is not possible to establish any one,"Wordinus. It istot possibile, domino est oblisti, quę one",0.40816326530612246
+test_000081.png,THE Fourth Gospel was almost certainly,"Them, Faren, Gessel, vos alviast, certain",0.5263157894736842
+test_000082.png,Gospel represents the work of generations of,"evangel represents, die worte et generationis et",0.3409090909090909
+test_000083.png,scholars who have compared the many manu-,"scholars, uno hacce comparet, me maii maii",0.34146341463414637
+test_000084.png,written in Greek . A modern text of the,willen in greek. A mooderii text of me,0.2564102564102564
+test_000085.png,which is most likely to have been the original,"Wochts Mont Lilych, to lebe, been the original",0.3695652173913043
+test_000086.png,text with absolute precision .,"mitti absolute precisionem,",0.3333333333333333
+test_000087.png,scripts of John and worked out the version,"scrips, ut solvi, quid worced, ut ne versione",0.42857142857142855
+test_000088.png,paragraphos markings were omitted . C. H. Roberts is of,"porographus vicirum esse, omittendis Christus, etc.",0.6181818181818182
+test_000089.png,"The bar was the commonest marking , but others","The, vor, uno fratre commodo et vicinus aut officio",0.6304347826086957
+test_000090.png,"some markings would be used , although which , it is","domine viclicius, quid de meo. Cupum iudicii, id",0.6923076923076923
+test_000091.png,impossible to say .,"impedito, etc.",0.631578947368421
+test_000092.png,were also used . Dots sometimes served in place of the,"nach als und was üwend, der herren istige",0.6851851851851852
+test_000093.png,"bar , and there are cases where spacing is used as","und, auch hel, die cales üwol, d.",0.7
+test_000094.png,the opinion that in the original of the Fourth Gospel,"opinique tua in te original, a te Iesu et",0.4716981132075472
+test_000095.png,it is now used to mark a paragraph ending . Frequently,"is ego, uxo te nomine a principu ordinus; in quo",0.6296296296296297
+test_000096.png,the original of the Gospel would be unmarked . The,"hic originica, et ne exceperis, volui, ut uniicere",0.68
+test_000097.png,Professor E. G. Turner is inclined to take the view that,"vosor, etc. Si liber, is incilioque totare, vilium tua",0.5892857142857143
+test_000098.png,about one third of a page of Souter's print .,alia me tuica a pogo et ducesse periit.,0.5555555555555556
+test_000099.png,manuscripts . A common size of column would hold,"monus cipitur, a comicio, etc. et odium, quicquid",0.625
+test_000100.png,columns . This is the invariable practice of ancient,convivicis. Illis istre iuicie practice et conciliis,0.5384615384615384
+test_000101.png,"whether paragraphed or not , would be laid out in","iuvetur, per quicquam apud, et non est, quid etiam",0.7755102040816326
+test_000102.png,"original of the Gospel , whether written on a roll or codex ,","regiorum, et ne quoque libellos mitterem, ocio, etc., et codex,",0.6885245901639344
+test_000103.png,a simple and serviceable book . It was robust - the number,"a simple, quod reviceable, post. Ita vero coluit, ille muniles",0.5
+test_000104.png,an easy form of book in which to find a,"an eorum faren of brok in uldici, to find a",0.3333333333333333
+test_000105.png,reference .,se amice,0.7272727272727273
+test_000106.png,The edge of this sheet was attached to a wooden dowel,"ille ecclesie, olim ilcio oleat, coelo affacileo, etc., cum vocetur, obveni",0.9622641509433962
+test_000107.png,this - and it was easily stored . It had two disadvantages . It,"tuis, quod ut vos egilię storal, et Leo tuo dis ad vanturum esseo, ut",0.5396825396825397
+test_000108.png,and the sheet wound round this central pin . The roll made,"collo, ne staec pauud, commodum tuis certa deum, ne collende",0.6206896551724138
+test_000109.png,which have survived the centuries is ample evidence of,"Quicquid libere superior, ille centuissimos; is, ample evidente, olim",0.5925925925925926
+test_000110.png,"was generally a single-sided form of book , and it was not","literis Genecallus a Simple, siquid form, et bone, quod isthuius",0.6206896551724138
+test_000111.png,"overwhelmed Herculaneum and Pompeii in A.D. 79 , his","rescilielmeo, Hesculoveum, quod Pomperii in A. D.",0.5192307692307693
+test_000112.png,the elder Pliny tells of the use of papyrus in roll-making .,"elder pium, illis et ille vir, ut popyris in eorum velim.",0.5833333333333334
+test_000113.png,The other form of book was the codex . In this the,olle form et bone vos ille coellex. In filio,0.54
+test_000114.png,they are in modern books .,ecclesiae ac in modernum bonum,0.6538461538461539
+test_000115.png,sheets were bound together down one edge much as,"liceis loca, bene togetur, dixit omnia esse mulctas",0.5625
+test_000116.png,information is contemporaneous with the New Testament .,"informationem per certe compocandos, id illi ille vel testament.",0.4909090909090909
+test_000117.png,"ecclesiastical circles . In his Natural History , 13 . 11-12 ,","ecclesiastico circlesiae in his naturum historum,",0.4032258064516129
+test_000118.png,As Pliny was killed in the eruption of Vesuvius which,"A Plinum nostris, illud in illa eruptione et vernovius, quid",0.5283018867924528
+test_000119.png,This last objection might have had some weight in,"illis lest obiection, wiͤcht habe Juden, söme vegligt, in",0.42857142857142855
+test_000120.png,"the roll , a sheet could easily be glued on .","nol, a aliud concilii de aliud omnia",0.6222222222222222
+test_000121.png,whether or not a particular text was written on,"Salutlus, or not a particulos, hic veritatem",0.5319148936170213
+test_000122.png,might be bulky . It is sometimes possible to tell,"migunt ex Bulling. It in dometimes proville, tol",0.40816326530612246
+test_000123.png,Against these advantages the codex was fragile and,"Agnitio, meae adventagis, ne codex non fragile, quod",0.4
+test_000124.png,"writing , but any papyrus left unused at the","veritiraeque, bui animi papumio, post annum ad thic",0.6363636363636364
+test_000125.png,a roll or a codex . Rolls were prepared for,a nobis et a codex. Rolli meae praeperedi forte,0.3488372093023256
+test_000126.png,end could be cut off . If the text was longer than,Quid corula de cui off. Id thu tetet pacis longis,0.44
+test_000127.png,The codex form was not so accommodating . Even,"Ille coelex formi, dicum, ut eo accommodatique ecclesiae",0.5869565217391305
+test_000128.png,while one whole side of his roll was unused .,"nomine, et inde vide, ut lum rell, etc. mihi",0.7333333333333333
+test_000129.png,"over the binding , or the whole codex rebound .","nec thu diuditii, ac ilio aliole codere nebruarii.",0.5531914893617021
+test_000130.png,"The verso of the roll was blank , and one","Tu vero et filium vel vos placuit, quo",0.6585365853658537
+test_000131.png,"in the case of the single-sheet quire , an extra","in filio ecclesiae et illum, attigitur, alvet quire, an extra",0.6875
+test_000132.png,"sending out his Gospel lacking the ending ,","auditus aut diu scopel accipitius illum auditus,",0.6976744186046512
+test_000133.png,"cannot think of an author , Mark for example ,","cannet nunae et, an author, mack for ex ample,",0.30434782608695654
+test_000134.png,sheet glued on might have to be gummed on,"alia, quod on mihi diccem, te, de commune",0.6341463414634146
+test_000135.png,in it the reservoir ... and I made both the,in regem volui. Quid magile voli,0.6976744186046512
+test_000136.png,"construction in lines 9 , 23-25 of the Moabite Stone ,","cuiarii. Nambris in Christo et Bisp. Hochite Hac,",0.7592592592592593
+test_000137.png,which read : And I built Baal-meon and made,"cuiusdam apud. Quo tamen Basileae, mea quid",0.7906976744186046
+test_000138.png,A natural transition from gardens and,"aclesia, tranquillen fratrem gaudens, und",0.5405405405405406
+test_000139.png,reservoirs for water inside the town .,"Vivo, frater, qualem mihi in",0.6842105263157895
+test_000140.png,the rock . King Mesha of Moab boasts of their,volo. Letius theologus et alioso partes et mecum,0.8444444444444444
+test_000141.png,supply . The pools are probably natural springs,popoli. Ita pacto alia sectaboli inatura periculo,0.6170212765957447
+test_000142.png,enlarged to become reservoirs or cisterns in,"Anglia, domine, venervita, atque expelio in",0.75
+test_000143.png,orchards to the vital question of water,"declendo, to ilio utra quandoquidam quam",0.7692307692307693
+test_000144.png,"the Shmah , loves the Lord God with","schmali, lores the Lord, quod Wisti,",0.42857142857142855
+test_000145.png,is the Shamir and such a man fulfils,is ille. Schomir und Süch et morum fulfils,0.4166666666666667
+test_000146.png,"prayer says : "" What am I ? A worm "" , he","präger segs; wol ein j. a vorim, he",0.5853658536585366
+test_000147.png,"all his heart , and with all his soul and",all his begt und uch all bis seul etc.,0.36585365853658536
+test_000148.png,"word "" SHAMIR "" means guarded or preser-","Quorum Stuaniae meous, quorded ac presertim",0.55
+test_000149.png,"ved . Therefore , the real man , who",Theredore. Hic real meum verbo,0.5277777777777778
+test_000150.png,with all his might and studies the,Mih all bis möglt und studies thebes,0.2647058823529412
+test_000151.png,"regards himself as insignificant , as the","regares himsellt os insignificant, os",0.24390243902439024
+test_000152.png,word of God .,vord o. P. Rod,0.6153846153846154
+test_000153.png,The word Shamir was used as a,"The werd Schamir, was used es a",0.13793103448275862
+test_000154.png,personal name ( Git. 68a ) . The Hebrew,"personal namen (gitur, quia). The. Hebreum",0.358974358974359
+test_000155.png,us earthly creatures to build an Altar,"Egchli creaturos; domino Baldus, an Alpar,",0.6052631578947368
+test_000156.png,"This man is the worm , the creature that","Thic morum is, ne horum. The creature, stude",0.45
+test_000157.png,"to mould our character , to melt our","möuld, ouch character, so gelt our",0.2777777777777778
+test_000158.png,Such a Shamir possesses the real acid,"Such a Schompt Posses, hee reel",0.43243243243243246
+test_000159.png,self against all the irrelevant pleasures .,"Selt agünst, ob me crelerunt plaesures.",0.3953488372093023
+test_000160.png,for God to come nearer to God .,"Por, quod tamen copere pearer, to. God.",0.4838709677419355
+test_000161.png,a man is the Shamir that guards him-,"Is ille. Schamir nihil quarus, huius",0.5833333333333334
+test_000162.png,cuts and polishes Altar-Stones . Such,"und Polishes, Altorannes, Stones. Süch",0.4594594594594595
+test_000163.png,heart of stone . This Shamir helps,"habeantur ob Stone. His, Schamir, huius",0.47058823529411764
+test_000164.png,facts . And these creatures existed from the,"fructs. And ipse creatures existet, frowi the",0.22727272727272727
+test_000165.png,"beginning . It is "" the stone , which the builders","begimus. It is die stonie, vobick me Bui eders",0.42
+test_000166.png,"of the corner "" . ( Ps. 118 , 22 . ) And the stone shall","et ille Cosnerus (Ps. 18. aug, ille stene",0.6071428571428571
+test_000167.png,tell !,ego.,0.8333333333333334
+test_000168.png,The action of the Shamir writes books and their,"Me actioni, ut tibi stovis, cogites partes, quod theic",0.5957446808510638
+test_000169.png,"diamond that incises the hardest rock , the hardest","dicuend, hac incises tue hardest söck, ne hordest",0.2549019607843137
+test_000170.png,books are readable . This Shamir is indeed a rare,profecto ore scandale. Quis Schovis in indeod cum sole,0.5510204081632653
+test_000171.png,"refused , but it is to become the head-stone","vetuseo, b ut is, 10. becovie, ille, heud Stonem",0.5
+test_000172.png,"crushing our soul "" ( see Hab. 2 , 10-11 ) . And it is","Crastinus, quic solvere (se Hab. 2. aprilis anno, etc.",0.6296296296296297
+test_000173.png,"Lord , as the waters cover the sea . "" ( Hab. 2 , 14 . )","Lord, os ille volers, coner de secu? Chab. 2.",0.5
+test_000174.png,""" For the stone shall cry out of the wall "" , like","tot ille stone, stille, cuius, ut et tibi vale, literis",0.64
+test_000175.png,filled with the knowledge of the Glory of the,"illud contra tua, incolendae et tua. Glonii et",0.6222222222222222
+test_000176.png,"creak in answer "" "" if the roof of our security is","in arceres, ut te post, ut aut securitum is",0.52
+test_000177.png,"through the Shamir : "" That the earth shall be","thsorgen, the Thavis. That tue ech, stille be",0.43478260869565216
+test_000178.png,"Baalam's ass , "" and the purlin of timber shall","Baptanis ass, oro, ille plurim, ut Simler,",0.574468085106383
+test_000179.png,the Light which can be read in every,"die light ütlich, coni beccid in Ereig",0.4722222222222222
+test_000180.png,They make us the Altar for God to emit,"speri, utate iis the ulter for God to eiusit.",0.42105263157894735
+test_000181.png,a deep impression on our feelings and senses .,"a deo interpretoque, cum vir Faeliusque, quid se esses.",0.6956521739130435
+test_000182.png,"of life , and all facts are "" one "" . We have all","ut lite, quid all facts ore ope. Ille habere all",0.3877551020408163
+test_000183.png,"most important creature , that was created on","importavi creature; itaque vocis, crederem",0.5555555555555556
+test_000184.png,"Sabbath , real peace to the whole world .","Sabbath, regem pege to, me utro est, morte",0.5121951219512195
+test_000185.png,"language . The Shamir is the "" seventh "" and","lausgüge. Die schänst is, hie, se rechti, ayd",0.5909090909090909
+test_000186.png,"which is written on two plates , the hard facts","istricti. Is voritten, an tuo plures, the haud foris",0.425531914893617
+test_000187.png,"the eve of the Sabbath , to bring the","ero, ut me sabbatii, 10.Bruius theologi",0.6756756756756757
+test_000188.png,"The Shamir's daily life writes the Decalogue ,","Christus consilii, librum vires, the decolague,",0.6086956521739131
+test_000189.png,come across human Shamirs and they leave,"cone, ocios humani Stemptus, apud meum legre",0.5
+test_000190.png,"diligently unto my commandments , which I command","diligentii, vyto, myc coniunxus dryensis, utinici I. compatriis",0.6326530612244898
+test_000191.png,"shall come to pass , if 1ye shall 1hearken","still, cuͤge to, ochs ist sye, soll Theackey",0.5
+test_000192.png,"your soul . "" This may seem very good , but there","Voir sove?“ Itis magis saecui rem, quod ad tibi haere",0.6122448979591837
+test_000193.png,is something deficient .,"Is Sorgethling, deficieit.",0.3333333333333333
+test_000194.png,serve Him with all your heart and with all,"herren win, wich all vor begert, ayd wirtz all",0.38095238095238093
+test_000195.png,"you this day , to love the Lord your God , and to","Ibi tuis deus, pro lare, ne Lord, quic boni, quid",0.5714285714285714
+test_000196.png,"Then the whole earth will be His Altar . "" And it","sineu, ne utole, earum will, be his vebar.",0.5510204081632653
+test_000197.png,"Lord God with all their visionary power ,","land, und wirsti, all meir vicinorum pomer,",0.4634146341463415
+test_000198.png,"summons of destiny , to solve the economic","summionis of destinui, te solve me oeconomicorum",0.2857142857142857
+test_000199.png,the work will have to be done by each,"Hie wort vil häre, so be vorze by euch",0.35135135135135137

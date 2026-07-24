@@ -1,0 +1,10 @@
+{
+  "run_id": "iam_bullinger_transfer",
+  "checkpoint": "pstroe/bullinger-general-model",
+  "split_dir": "/home/ezu/Documents/GitHub/HTR/data/iam/processed/test",
+  "output_dir": "/home/ezu/Documents/GitHub/HTR/experiments",
+  "batch_size": 4,
+  "max_samples": 200,
+  "backend": "trocr",
+  "seed": 42
+}

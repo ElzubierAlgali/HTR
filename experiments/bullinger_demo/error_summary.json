@@ -1,0 +1,17 @@
+{
+  "top_errors": [
+    {
+      "pattern": "substitute:'e'->'e'",
+      "count": 3
+    },
+    {
+      "pattern": "substitute:'ui'->'ui'",
+      "count": 1
+    },
+    {
+      "pattern": "substitute:'ge'->'th'",
+      "count": 1
+    }
+  ],
+  "total_mismatched_lines": 4
+}

@@ -1,0 +1,9 @@
+filename,reference,prediction,cer
+test_000000.png,"assuredness "" Bella Bella Marie "" ( Parlophone ) , a lively song that changes tempo mid-way .","assuredness "" Bella Bella Marie "" ( Bishopsome ) a lively song that changes tempo midway",0.11827956989247312
+test_000001.png,"I don't think he will storm the charts with this one , but it 's a good start .","I don't think he will storm the charts with this one , but it's a good start .",0.012658227848101266
+test_000002.png,"CHRIS CHARLES , 39 , who lives in Stockton-on-Tees , is an accountant .","CHRIS CHARLES , 33 , who lives in Stockton - on - Tee's , is an accountant .",0.08450704225352113
+test_000003.png,Become a success with a disc and hey presto ! You 're a star ... . Rolly sings with,Become a success with a disc and they presto ! You're a star ... Rolly sings with,0.04819277108433735
+test_000004.png,"Tolch , as he is known in Tin Pan Alley , likes songs with a month in the title . He wrote","Folch , as he is known in Tin Pan Alley , lives , with a month in the title . He wrote",0.07777777777777778
+test_000005.png,""" My September Love , "" the big David Whitfield hit of 1956 .",""" My September Love "" , the big David Whitfield hit of 1956 .",0.03278688524590164
+test_000006.png,He is also a director of a couple of garages . And he finds time as well to be a lyric,He is also a director of a couple of garages . And he finds time as well to be a lyric,0.0
+test_000007.png,"writer . He writes with Tolchard Evans , composer of "" Lady of Spain "" and other big hits .","writer . He writes with Tolchard Evans , composer of "" Lady of Spain "" and other big hits",0.02197802197802198

@@ -165,6 +165,5 @@ cython_debug/
 data/iam/raw/
 data/iam/processed/
 data/iam/demo/
-experiments/
 *.pt
 models/bullinger-general-model/

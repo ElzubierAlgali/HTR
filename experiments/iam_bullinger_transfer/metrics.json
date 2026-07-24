@@ -1,0 +1,9 @@
+{
+  "run_id": "iam_bullinger_transfer",
+  "checkpoint": "pstroe/bullinger-general-model",
+  "backend": "trocr",
+  "n_samples": 200,
+  "cer": 0.5236760124610592,
+  "wer": 0.9115133232780291,
+  "split_dir": "/home/ezu/Documents/GitHub/HTR/data/iam/processed/test"
+}

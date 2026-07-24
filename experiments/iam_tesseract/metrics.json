@@ -1,0 +1,6 @@
+{
+  "run_id": "iam_tesseract",
+  "status": "skipped",
+  "reason": "Tesseract binary not installed (sudo apt install tesseract-ocr)",
+  "backend": "tesseract"
+}

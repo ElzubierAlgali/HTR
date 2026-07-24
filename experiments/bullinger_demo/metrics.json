@@ -1,0 +1,9 @@
+{
+  "run_id": "bullinger_demo",
+  "checkpoint": "pstroe/bullinger-general-model",
+  "backend": "trocr",
+  "n_samples": 4,
+  "cer": 0.0353356890459364,
+  "wer": 0.15555555555555556,
+  "split_dir": "/home/ezu/Documents/GitHub/HTR/data/bullinger/examples"
+}

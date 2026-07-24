@@ -1,0 +1,9 @@
+{
+  "run_id": "iam_demo",
+  "checkpoint": "microsoft/trocr-base-handwritten",
+  "backend": "trocr",
+  "n_samples": 8,
+  "cer": 0.05045871559633028,
+  "wer": 0.14965986394557823,
+  "split_dir": "/home/ezu/Documents/GitHub/HTR/data/iam/demo"
+}
