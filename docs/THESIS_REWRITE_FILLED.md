@@ -2,7 +2,7 @@
 
 Aligned text for `Enhancing Handwritten Text Recognition Using Transformer Models Derived from Large Language Models.docx`.
 
-**Rule:** Replace placeholder `[pending:run_id.field]` with values from `experiments/<run_id>/metrics.json` after running evaluations.
+**Rule:** Replace `METRIC` placeholders (`run_id.field`) with values from `experiments/<run_id>/metrics.json` after running evaluations.
 
 ---
 

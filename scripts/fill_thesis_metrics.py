@@ -17,7 +17,7 @@ def load_metric(run_id: str, field: str) -> str:
     path = EXPERIMENTS / run_id / "metrics.json"
     if not path.exists():
         return f"[pending:{run_id}.{field}]"
-    data = json.loads(path.read_text(encoding="utf-8"))
+    data = json.loads(path.read_text(encoding="utf-8-sig"))
     if data.get("status") == "skipped":
         return f"[skipped: {data.get('reason', 'n/a')}]"
     value = data.get(field, "?")
