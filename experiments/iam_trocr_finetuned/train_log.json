@@ -1,0 +1,41 @@
+{
+  "run_id": "iam_trocr_finetuned",
+  "base_checkpoint": "models/iam_trocr_finetuned",
+  "lr": 5e-06,
+  "batch_size": 2,
+  "grad_accum": 1,
+  "epochs_ran": 1,
+  "best_val_cer": 1.0,
+  "device": "cpu",
+  "wall_clock_sec": 1.8076097965240479,
+  "seed": 42,
+  "max_train_samples": 32,
+  "max_val_samples": 16,
+  "n_train": 8,
+  "n_val": 4,
+  "output_model_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\models\\iam_trocr_finetuned",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 10.349141120910645,
+      "val_cer": 1.0
+    }
+  ],
+  "config": {
+    "run_id": "iam_trocr_finetuned",
+    "base_checkpoint": "models/iam_trocr_finetuned",
+    "train_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\train",
+    "val_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\val",
+    "output_model_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\models\\iam_trocr_finetuned",
+    "output_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\experiments",
+    "learning_rate": 5e-06,
+    "batch_size": 2,
+    "grad_accum": 1,
+    "epochs": 1,
+    "early_stop_patience": 1,
+    "max_target_length": 128,
+    "max_train_samples": 32,
+    "max_val_samples": 16,
+    "seed": 42
+  }
+}

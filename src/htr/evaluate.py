@@ -15,15 +15,15 @@ if __name__ == "__main__" and __package__ is None:
 
 import csv
 import json
-import shutil
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
 import torch
 from PIL import Image
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
 
+from .dataset import LineDataset
 from .metrics import compute_cer, compute_wer, per_sample_cer, summarize_errors
 from .models import ModelBundle, load_model_bundle
 
@@ -36,36 +36,8 @@ class EvalConfig:
     output_dir: Path
     batch_size: int = 8
     max_samples: int | None = None
-    backend: str = "trocr"  # trocr | tesseract
+    backend: str = "trocr"  # trocr | tesseract | crnn
     seed: int = 42
-
-
-class LineDataset(Dataset):
-    def __init__(self, split_dir: Path, max_samples: int | None = None):
-        self.images_dir = split_dir / "images"
-        labels_path = split_dir / "labels.csv"
-        if not labels_path.exists():
-            raise FileNotFoundError(f"Missing labels file: {labels_path}")
-
-        self.samples: list[tuple[str, str]] = []
-        with open(labels_path, newline="", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                filename = row["filename"]
-                text = row["transcription"]
-                image_path = self.images_dir / filename
-                if image_path.exists():
-                    self.samples.append((str(image_path), text))
-
-        if max_samples is not None:
-            self.samples = self.samples[:max_samples]
-
-    def __len__(self) -> int:
-        return len(self.samples)
-
-    def __getitem__(self, idx: int) -> dict[str, Any]:
-        path, text = self.samples[idx]
-        return {"path": path, "reference": text, "idx": idx}
 
 
 def _collate(batch: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -120,8 +92,13 @@ def run_evaluation(config: EvalConfig) -> dict[str, Any]:
         raise ValueError(f"No samples found in {config.split_dir}")
 
     bundle = None
+    crnn_bundle = None
     if config.backend == "trocr":
         bundle = load_model_bundle(config.checkpoint)
+    elif config.backend == "crnn":
+        from .baselines.crnn import load_crnn_bundle
+
+        crnn_bundle = load_crnn_bundle(config.checkpoint)
 
     predictions: list[str] = []
     references: list[str] = []
@@ -143,6 +120,9 @@ def run_evaluation(config: EvalConfig) -> dict[str, Any]:
             preds = _predict_trocr_batch(bundle, paths)
         elif config.backend == "tesseract":
             preds = [_predict_tesseract(p) for p in paths]
+        elif config.backend == "crnn":
+            assert crnn_bundle is not None
+            preds = crnn_bundle.predict_paths(paths)
         else:
             raise ValueError(f"Unknown backend: {config.backend}")
 

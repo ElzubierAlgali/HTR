@@ -1,0 +1,10 @@
+run_id: iam_trocr_handwritten
+# Smoke uses local tiny checkpoint when Hub weights are unavailable.
+# Primary GPU config uses microsoft/trocr-base-handwritten.
+checkpoint: models/iam_trocr_finetuned
+split_dir: data/iam/processed/test
+output_dir: experiments
+batch_size: 2
+max_samples: 16
+backend: trocr
+seed: 42

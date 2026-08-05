@@ -1,0 +1,7 @@
+run_id: iam_trocr_finetuned
+checkpoint: models/iam_trocr_finetuned
+split_dir: data/iam/processed/test
+output_dir: experiments
+batch_size: 1
+backend: trocr
+seed: 42

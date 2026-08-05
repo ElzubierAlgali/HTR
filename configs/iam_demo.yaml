@@ -2,6 +2,6 @@ run_id: iam_demo
 checkpoint: microsoft/trocr-base-handwritten
 split_dir: data/iam/demo
 output_dir: experiments
-batch_size: 4
+batch_size: 1
 backend: trocr
 seed: 42

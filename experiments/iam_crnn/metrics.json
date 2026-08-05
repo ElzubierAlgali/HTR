@@ -1,0 +1,11 @@
+{
+  "run_id": "iam_crnn",
+  "checkpoint": "models/iam_crnn",
+  "backend": "crnn",
+  "n_samples": 6,
+  "cer": 0.958904109589041,
+  "wer": 1.0,
+  "split_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\test",
+  "protocol": "smoke_synthetic",
+  "note": "Not for thesis primary numbers. Run docs/GPU_PROTOCOL.md."
+}

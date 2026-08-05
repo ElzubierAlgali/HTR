@@ -1,0 +1,14 @@
+run_id: iam_trocr_finetuned
+base_checkpoint: microsoft/trocr-base-handwritten
+train_dir: data/iam/processed/train
+val_dir: data/iam/processed/val
+output_model_dir: models/iam_trocr_finetuned
+output_dir: experiments
+learning_rate: 5.0e-6
+# MX130 2GB: micro-batch 1, accumulate to effective batch 8
+batch_size: 1
+grad_accum: 8
+epochs: 8
+early_stop_patience: 2
+max_target_length: 128
+seed: 42

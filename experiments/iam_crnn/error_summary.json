@@ -1,0 +1,49 @@
+{
+  "top_errors": [
+    {
+      "pattern": "substitute:'T'->'e'",
+      "count": 2
+    },
+    {
+      "pattern": "delete:'he '->''",
+      "count": 1
+    },
+    {
+      "pattern": "substitute:'j'->'e'",
+      "count": 1
+    },
+    {
+      "pattern": "delete:'umps'->''",
+      "count": 1
+    },
+    {
+      "pattern": "substitute:'H'->'e'",
+      "count": 1
+    },
+    {
+      "pattern": "delete:'an'->''",
+      "count": 1
+    },
+    {
+      "pattern": "substitute:'I'->'e'",
+      "count": 1
+    },
+    {
+      "pattern": "delete:'AM '->''",
+      "count": 1
+    },
+    {
+      "pattern": "delete:'ran'->''",
+      "count": 1
+    },
+    {
+      "pattern": "substitute:'C'->'e'",
+      "count": 1
+    },
+    {
+      "pattern": "delete:'har'->''",
+      "count": 1
+    }
+  ],
+  "total_mismatched_lines": 6
+}

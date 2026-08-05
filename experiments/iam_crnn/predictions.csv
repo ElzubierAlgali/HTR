@@ -1,0 +1,7 @@
+filename,reference,prediction,cer
+test_000.png,The quick brown fox,e,0.9473684210526315
+test_001.png,jumps over the lazy dog,e,0.9565217391304348
+test_002.png,Handwritten text recognition,e,0.9642857142857143
+test_003.png,IAM English line sample,e,0.9565217391304348
+test_004.png,Transformer models for HTR,e,0.9615384615384616
+test_005.png,Character error rate metric,e,0.9629629629629629

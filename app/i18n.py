@@ -18,8 +18,8 @@ STRINGS: dict[str, dict[str, str]] = {
             "evaluated on the IAM Handwriting Database benchmark."
         ),
         "research_scope": (
-            "Evaluation-only study on IAM English line images "
-            "(6,482 train / 976 validation / 2,915 test lines)."
+            "IAM English line images (6,482 train / 976 validation / 2,915 test); "
+            "pretrained and fine-tuned TrOCR with CRNN and Tesseract baselines."
         ),
         "lang_label": "Language / اللغة",
         "lang_en": "English",
@@ -58,7 +58,7 @@ STRINGS: dict[str, dict[str, str]] = {
             "This web demo supports the thesis **application objective**: interactive English IAM "
             "line transcription with optional ground-truth comparison.\n\n"
             "**Objectives demonstrated:**\n"
-            "1. Pretrained TrOCR on English IAM line images\n"
+            "1. TrOCR on English IAM line images (pretrained / fine-tuned in the research pipeline)\n"
             "2. Real-time transcription in the browser\n"
             "3. Per-line CER when ground truth is provided\n\n"
             "**Model:** `microsoft/trocr-base-handwritten` · "
@@ -81,8 +81,8 @@ STRINGS: dict[str, dict[str, str]] = {
             "المحولات، مع التقييم على قاعدة بيانات IAM."
         ),
         "research_scope": (
-            "دراسة تقييمية فقط على صور أسطر IAM الإنجليزية "
-            "(6482 تدريب / 976 تحقق / 2915 اختبار)."
+            "صور أسطر IAM الإنجليزية (6482 تدريب / 976 تحقق / 2915 اختبار)؛ "
+            "TrOCR مدرب مسبقاً ومضبوط بدقة مع خطوط أساس CRNN وTesseract."
         ),
         "lang_label": "Language / اللغة",
         "lang_en": "English",

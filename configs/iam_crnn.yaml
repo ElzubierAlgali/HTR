@@ -1,0 +1,16 @@
+run_id: iam_crnn
+checkpoint: models/iam_crnn
+train_dir: data/iam/processed/train
+val_dir: data/iam/processed/val
+split_dir: data/iam/processed/test
+output_dir: experiments
+output_model_dir: models/iam_crnn
+backend: crnn
+learning_rate: 1.0e-3
+# MX130 2GB-friendly; CRNN is light vs TrOCR
+batch_size: 8
+epochs: 20
+early_stop_patience: 3
+img_height: 32
+img_width: 128
+seed: 42

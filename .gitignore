@@ -167,3 +167,5 @@ data/iam/processed/
 data/iam/demo/
 *.pt
 models/bullinger-general-model/
+models/iam_trocr_finetuned/
+models/iam_crnn/

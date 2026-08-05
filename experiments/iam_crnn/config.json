@@ -1,0 +1,10 @@
+{
+  "run_id": "iam_crnn",
+  "checkpoint": "models/iam_crnn",
+  "split_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\test",
+  "output_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\experiments",
+  "batch_size": 4,
+  "max_samples": 16,
+  "backend": "crnn",
+  "seed": 42
+}

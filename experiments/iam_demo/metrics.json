@@ -1,9 +1,11 @@
 {
   "run_id": "iam_demo",
-  "checkpoint": "microsoft/trocr-base-handwritten",
+  "checkpoint": "models/iam_trocr_finetuned",
   "backend": "trocr",
-  "n_samples": 8,
-  "cer": 0.05045871559633028,
-  "wer": 0.14965986394557823,
-  "split_dir": "/home/ezu/Documents/GitHub/HTR/data/iam/demo"
+  "n_samples": 4,
+  "cer": 1.0,
+  "wer": 1.0,
+  "split_dir": "data\\iam\\demo",
+  "protocol": "smoke_synthetic",
+  "note": "Not for thesis primary numbers. Run docs/GPU_PROTOCOL.md."
 }

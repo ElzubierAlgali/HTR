@@ -4,7 +4,7 @@ This document locks the research story for the thesis and codebase. Every claim 
 
 ## Primary research question
 
-How well do **pretrained transformer-based HTR models** (TrOCR) perform on the **English IAM Handwriting Database** benchmark compared to a classical OCR baseline and published literature?
+How well do **transformer-based HTR models** (pretrained and fine-tuned TrOCR) perform on the **English IAM Handwriting Database** benchmark compared to a CRNN+CTC baseline, classical OCR (Tesseract), and published literature?
 
 ## Locked definitions
 
@@ -12,14 +12,16 @@ How well do **pretrained transformer-based HTR models** (TrOCR) perform on the *
 |------|--------|
 | Language | **English only** |
 | Primary dataset | IAM Handwriting Database, line-level, English |
-| Primary model | `microsoft/trocr-base-handwritten` |
+| Primary model | `microsoft/trocr-base-handwritten` (+ fine-tuned checkpoint) |
 | Architecture | Vision Transformer (ViT) image encoder + BART text decoder |
-| Training in this work | **Evaluation-only** — no new fine-tuning |
-| Loss (TrOCR original training) | Autoregressive cross-entropy — **not CTC** |
+| Training in this work | **TrOCR fine-tune on IAM** + **CRNN+CTC baseline train** (GPU primary) |
+| Loss (TrOCR) | Autoregressive cross-entropy — **not CTC** |
+| Loss (CRNN) | CTC |
 | Primary metrics | Character Error Rate (CER), Word Error Rate (WER) |
-| Measured baseline | Tesseract 5.x on the same IAM test split |
+| Measured baselines | CRNN+CTC and Tesseract 5.x on the same full IAM test split |
 | Literature baselines | Cited reported CER/WER only — no estimated numbers |
 | Application | Gradio demo on IAM English sample lines |
+| Primary eval sample | **n = 2,915** (full IAM test) for measured runs |
 
 ## Out of scope
 
@@ -27,7 +29,9 @@ How well do **pretrained transformer-based HTR models** (TrOCR) perform on the *
 - GPT-3 / BERT / XLNet as implemented models
 - Medical prescription recognition
 - Custom transformer architecture modifications
-- IAM fine-tuning (future work)
+- CTC as the TrOCR training loss
+- Binarization as an implementation step
+- Precision / recall / F1 as primary metrics
 
 ## Metric normalization
 
@@ -56,11 +60,13 @@ Uses the dataset publisher splits directly:
 
 | Run ID | Model | Dataset | Role |
 |--------|-------|---------|------|
-| `iam_trocr_handwritten` | `microsoft/trocr-base-handwritten` | IAM test (200 lines default) | Primary result |
+| `iam_trocr_handwritten` | `microsoft/trocr-base-handwritten` | IAM test (full, n=2,915) | Pretrained primary |
+| `iam_trocr_finetuned` | Local `models/iam_trocr_finetuned/` | IAM test (full, n=2,915) | Fine-tuned TrOCR |
+| `iam_crnn` | CRNN+CTC | IAM test (full, n=2,915) | Neural baseline |
+| `iam_tesseract` | Tesseract | IAM test (full, n=2,915) | Classical baseline |
 | `iam_demo` | `microsoft/trocr-base-handwritten` | IAM demo (8 English lines) | Application qualitative |
-| `iam_tesseract` | Tesseract | IAM test | Measured classical baseline |
 
-The default `max_samples` (200) keeps CPU-only evaluation tractable. Remove `max_samples` from the YAML configs to evaluate the full IAM test split (2,915 lines) on a GPU machine.
+Primary YAMLs omit `max_samples` (full test). Smoke configs under `configs/smoke/` keep tiny limits for CPU checks. Thesis numbers must come from GPU full runs (`n=2,915`).
 
 ## Traceability rule
 
@@ -74,4 +80,12 @@ Reproduce with:
 
 ```bash
 python scripts/run_eval.py --config configs/<config>.yaml
+python scripts/run_train.py --config configs/iam_trocr_finetune.yaml
+python scripts/run_train_crnn.py --config configs/iam_crnn.yaml
 ```
+
+## Chapter boundaries
+
+- **Chapter 3 (Methodology):** research design only — no result numbers
+- **Chapter 4 (Implementation and Results):** contribution, brief implementation, experiments, results, analysis
+- **Appendices:** full source code listings

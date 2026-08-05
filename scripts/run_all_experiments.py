@@ -11,8 +11,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CONFIGS = [
     "configs/iam_trocr_handwritten.yaml",
-    "configs/iam_demo.yaml",
+    "configs/iam_trocr_finetuned.yaml",
+    "configs/iam_crnn.yaml",
     "configs/iam_tesseract.yaml",
+    "configs/iam_demo.yaml",
 ]
 
 
@@ -24,10 +26,21 @@ def main() -> int:
         run_id = Path(config).stem
         metrics_path = REPO_ROOT / "experiments" / run_id / "metrics.json"
         if metrics_path.exists():
-            data = json.loads(metrics_path.read_text(encoding="utf-8"))
-            if data.get("status") != "skipped" or run_id == "iam_tesseract":
+            data = json.loads(metrics_path.read_text(encoding="utf-8-sig"))
+            # Re-run if cached metrics are smoke-sized while using primary configs
+            n = data.get("n_samples")
+            is_primary_full = run_id != "iam_demo" and data.get("status") != "skipped"
+            if data.get("status") == "skipped" and run_id == "iam_tesseract":
+                print(f"\n=== Skipping {config} (tesseract skipped) ===", flush=True)
+                results[config] = "skipped"
+                continue
+            if is_primary_full and n is not None and int(n) >= 2915:
+                print(f"\n=== Skipping {config} (full metrics exist, n={n}) ===", flush=True)
+                results[config] = "ok (cached)"
+                continue
+            if run_id == "iam_demo" and data.get("status") != "skipped":
                 print(f"\n=== Skipping {config} (metrics exist) ===", flush=True)
-                results[config] = "ok (cached)" if data.get("status") != "skipped" else "skipped"
+                results[config] = "ok (cached)"
                 continue
 
         print(f"\n=== Running {config} ===", flush=True)

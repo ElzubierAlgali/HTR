@@ -1,0 +1,17 @@
+run_id: iam_trocr_finetuned
+# Tiny local checkpoint for CPU smoke when Hub weights are unavailable.
+# Full GPU runs use microsoft/trocr-base-handwritten (see configs/iam_trocr_finetune.yaml).
+base_checkpoint: models/iam_trocr_finetuned
+train_dir: data/iam/processed/train
+val_dir: data/iam/processed/val
+output_model_dir: models/iam_trocr_finetuned
+output_dir: experiments
+learning_rate: 5.0e-6
+batch_size: 2
+grad_accum: 1
+epochs: 1
+early_stop_patience: 1
+max_target_length: 128
+max_train_samples: 32
+max_val_samples: 16
+seed: 42

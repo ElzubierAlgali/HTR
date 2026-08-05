@@ -1,73 +1,21 @@
 {
   "top_errors": [
     {
-      "pattern": "delete:'s'->''",
-      "count": 2
-    },
-    {
-      "pattern": "substitute:'n'->'n'",
+      "pattern": "delete:'The '->''",
       "count": 1
     },
     {
-      "pattern": "substitute:'l'->'e'",
+      "pattern": "delete:'jumps'->''",
       "count": 1
     },
     {
-      "pattern": "delete:'l'->''",
+      "pattern": "delete:'Han'->''",
       "count": 1
     },
     {
-      "pattern": "substitute:' '->' '",
-      "count": 1
-    },
-    {
-      "pattern": "delete:'h'->''",
-      "count": 1
-    },
-    {
-      "pattern": "substitute:'I'->'I'",
-      "count": 1
-    },
-    {
-      "pattern": "insert:''->'ARLE'",
-      "count": 1
-    },
-    {
-      "pattern": "substitute:'A'->'S'",
-      "count": 1
-    },
-    {
-      "pattern": "substitute:'a'->'a'",
-      "count": 1
-    },
-    {
-      "pattern": "substitute:'u'->'u'",
-      "count": 1
-    },
-    {
-      "pattern": "delete:'c'->''",
-      "count": 1
-    },
-    {
-      "pattern": "substitute:'T'->'F'",
-      "count": 1
-    },
-    {
-      "pattern": "substitute:'he'->'he'",
-      "count": 1
-    },
-    {
-      "pattern": "insert:''->' '",
-      "count": 1
-    },
-    {
-      "pattern": "delete:'S'->''",
-      "count": 1
-    },
-    {
-      "pattern": "delete:'w'->''",
+      "pattern": "delete:'IAM '->''",
       "count": 1
     }
   ],
-  "total_mismatched_lines": 7
+  "total_mismatched_lines": 4
 }
