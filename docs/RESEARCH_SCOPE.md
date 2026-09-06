@@ -18,17 +18,17 @@ How well do **transformer-based HTR models** (pretrained and fine-tuned TrOCR) p
 | Loss (TrOCR) | Autoregressive cross-entropy — **not CTC** |
 | Loss (CRNN) | CTC |
 | Primary metrics | Character Error Rate (CER), Word Error Rate (WER) |
-| Primary measured runs | E1 pretrained TrOCR, E2 fine-tuned TrOCR, E3 CRNN+CTC on full IAM test |
-| Optional baseline | Tesseract 5.x when system binary is installed; otherwise recorded as skipped |
+| Primary measured runs | E1 pretrained TrOCR, E2 fine-tuned TrOCR, E3 CRNN+CTC, E4 Tesseract on full IAM test |
 | Literature baselines | Cited reported CER/WER only — no estimated numbers; protocol may differ |
 | Application | Gradio demo on IAM English sample lines (qualitative; not primary CER) |
-| Primary eval sample | **n = 2,915** (full IAM test) for E1–E3 |
+| Primary eval sample | **n = 2,915** (full IAM test) for E1–E4 |
 | Contribution framing | Aligned research-and-application pipeline — **not** a novel architecture or SOTA claim |
 
 ## Honesty locks (match logged runs)
 
 - Fine-tuned TrOCR did **not** improve test CER vs Hub pretrained under the logged early-stopped run; report as negative/neutral.
 - CRNN+CTC is a **weak** lightweight baseline in this setup, not a competitive neural system.
+- Tesseract is a **classical** line-mode reference (measured), not a handwriting-tuned specialist.
 - Demo / smoke metrics must never appear as primary thesis numbers.
 - Do not claim matched state-of-the-art against literature without identical preprocess/splits.
 
@@ -72,8 +72,8 @@ Uses the dataset publisher splits directly:
 | `iam_trocr_handwritten` | `microsoft/trocr-base-handwritten` | IAM test (full, n=2,915) | **Primary** pretrained |
 | `iam_trocr_finetuned` | Local `models/iam_trocr_finetuned/` | IAM test (full, n=2,915) | **Primary** fine-tuned |
 | `iam_crnn` | CRNN+CTC | IAM test (full, n=2,915) | Neural baseline |
-| `iam_tesseract` | Tesseract | IAM test (full, n=2,915) | Optional classical |
-| `iam_demo` | TrOCR (local or Hub) | IAM demo subset | Application qualitative |
+| `iam_tesseract` | Tesseract | IAM test (full, n=2,915) | Classical baseline (measured) |
+| `iam_demo` | TrOCR (local or Hub) | IAM demo subset | Application qualitative only — never primary CER |
 
 Primary YAMLs omit `max_samples` (full test). Smoke configs under `configs/smoke/` keep tiny limits for CPU checks. Thesis numbers must come from GPU full runs (`n=2,915`).
 

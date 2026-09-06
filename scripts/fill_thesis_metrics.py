@@ -12,6 +12,14 @@ EXPERIMENTS = REPO_ROOT / "experiments"
 JOBS = [
     (REPO_ROOT / "docs" / "THESIS_REWRITE.md", REPO_ROOT / "docs" / "THESIS_REWRITE_FILLED.md"),
     (
+        REPO_ROOT / "docs" / "CHAPTER_1_INTRODUCTION.md",
+        REPO_ROOT / "docs" / "CHAPTER_1_INTRODUCTION_FILLED.md",
+    ),
+    (
+        REPO_ROOT / "docs" / "CHAPTER_2_LITERATURE_REVIEW.md",
+        REPO_ROOT / "docs" / "CHAPTER_2_LITERATURE_REVIEW_FILLED.md",
+    ),
+    (
         REPO_ROOT / "docs" / "CHAPTER_4_IMPLEMENTATION_RESULTS.md",
         REPO_ROOT / "docs" / "CHAPTER_4_IMPLEMENTATION_RESULTS_FILLED.md",
     ),
@@ -19,6 +27,7 @@ JOBS = [
         REPO_ROOT / "docs" / "CHAPTER_5_CONCLUSION.md",
         REPO_ROOT / "docs" / "CHAPTER_5_CONCLUSION_FILLED.md",
     ),
+    (REPO_ROOT / "docs" / "ABSTRACT.md", REPO_ROOT / "docs" / "ABSTRACT_FILLED.md"),
 ]
 
 

@@ -1,3 +1,7 @@
-# Skipped
+# iam_tesseract
 
-Install Tesseract: `sudo apt install tesseract-ocr`
+Reproduce:
+
+```bash
+python scripts/run_eval.py --config configs/iam_tesseract.yaml
+```

@@ -6,9 +6,13 @@ Aligned text for `Enhancing Handwritten Text Recognition Using Transformer Model
 
 ---
 
-## Abstract (replace empty abstract)
+## Abstract (English)
 
-Handwritten text recognition (HTR) remains challenging due to variability in writing styles. This thesis evaluates **pretrained and fine-tuned TrOCR** models—combining a **Vision Transformer (ViT) encoder** with a **BART text decoder**—on the **English IAM Handwriting Database** benchmark (full test, n=2,915). We implement a reproducible pipeline measuring Character Error Rate (CER) and Word Error Rate (WER), fine-tune TrOCR on IAM, train a CRNN+CTC baseline, and contextualize results against published HTR literature. A Gradio web application demonstrates English line transcription. Primary pretrained IAM result: CER **4.72%** (n=2915); fine-tuned: CER **4.96%** (slightly higher; reported as a negative/neutral finding). This work contributes an aligned research-and-application pipeline rather than a novel architecture.
+Handwritten text recognition (HTR) remains challenging due to variability in writing styles. In this thesis I evaluate **pretrained and fine-tuned TrOCR** models—combining a **Vision Transformer (ViT) encoder** with a **BART text decoder**—on the **English IAM Handwriting Database** benchmark (full test, n=2,915). I implement a reproducible pipeline measuring Character Error Rate (CER) and Word Error Rate (WER), fine-tune TrOCR on IAM, train a CRNN+CTC baseline, evaluate classical Tesseract on the same split, and contextualize results against published HTR literature. A Gradio web application demonstrates English line transcription (qualitative only). My primary pretrained IAM result is CER **4.72%** (n=2915); after fine-tuning I obtain CER **4.96%** (slightly higher; reported as a negative/neutral finding). This work contributes an aligned research-and-application pipeline rather than a novel architecture.
+
+## الملخص (Arabic Abstract)
+
+لا يزال التعرف على النص المكتوب بخط اليد (HTR) يمثل تحدياً بحثياً بسبب التباين الكبير في أساليب الكتابة. تقيّم هذه الرسالة نماذج **TrOCR** المدربة مسبقاً والمضبوطة دقيقاً — التي تجمع بين مُرمِّز **Vision Transformer (ViT)** ومُفكِّك نص **BART** — على معيار قاعدة بيانات **IAM** الإنجليزية لسطور الكتابة اليدوية (مجموعة الاختبار الكاملة، n=2,915). أنفّذ خط أنابيب قابلاً لإعادة الإنتاج لقياس معدل خطأ الحروف (CER) ومعدل خطأ الكلمات (WER)، وأضبط TrOCR على بيانات IAM، وأدرّب خط أساس CRNN+CTC، وأقيّم محرك Tesseract الكلاسيكي على نفس التقسيم، وأضع النتائج في سياق الأدبيات المنشورة في مجال HTR. كما أقدّم تطبيقاً ويب باستخدام Gradio لتوضيح نسخ السطور الإنجليزية (بصورة نوعية فقط). النتيجة الأساسية للنموذج المدرب مسبقاً هي CER **4.72%** (n=2915)؛ وبعد الضبط الدقيق أحصل على CER **4.96%** (أعلى قليلاً؛ وأُبلّغ عنها بوصفها نتيجة سلبية/محايدة). تسهم هذه الرسالة بخط أنابيب بحثي–تطبيقي متسق، لا بابتكار معمارية جديدة.
 
 ---
 
@@ -60,7 +64,7 @@ Structure:
 - 3.4 Model selection (TrOCR / CRNN+CTC / optional Tesseract; Figure 3.2)
 - 3.5 Experiment design and evaluation metrics (Table 3.2)
 - 3.6 Comparative framework
-- 3.7 Scope of the chapter
+- 3.7 Conclusion
 
 ---
 
@@ -84,7 +88,7 @@ Structure:
 | Pretrained TrOCR | 4.72% | 11.64% | 2915 | Primary |
 | Fine-tuned TrOCR | 4.96% | 12.46% | 2915 | Primary (no gain vs Hub) |
 | CRNN+CTC | 81.82% | 96.56% | 2915 | Weak neural baseline |
-| Tesseract | [skipped: Tesseract binary not installed (sudo apt install tesseract-ocr)] | [skipped: Tesseract binary not installed (sudo apt install tesseract-ocr)] | [skipped: Tesseract binary not installed (sudo apt install tesseract-ocr)] | Optional / may be skipped |
+| Tesseract | 56.33% | 91.35% | 2915 | Optional / may be skipped |
 | Demo | 100.00% [SMOKE—not primary] | 100.00% [SMOKE—not primary] | 4 | Application only — not primary |
 
 ### Literature comparison (cited, not estimated)

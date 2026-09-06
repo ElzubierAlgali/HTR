@@ -6,26 +6,35 @@ Maps thesis sections to code artifacts for traceability.
 
 | Content | Source |
 |---------|--------|
+| English + Arabic abstracts | `docs/ABSTRACT.md` / `docs/ABSTRACT_FILLED.md` / `docs/ABSTRACT.docx` |
 | IAM CER/WER (pretrained) | `experiments/iam_trocr_handwritten/metrics.json` |
 | Fine-tuned CER/WER | `experiments/iam_trocr_finetuned/metrics.json` |
 | Method | `docs/RESEARCH_SCOPE.md` |
-| Application | `experiments/iam_demo/metrics.json` |
+| Application | Gradio demo (qualitative only; not primary CER) |
 
 ## Chapter 1 — Introduction
 
-| Section | Alignment action |
-|---------|------------------|
-| Problem statement | English HTR on IAM |
-| Objectives | Evaluate + fine-tune TrOCR; CRNN/Tesseract baselines; Gradio demo |
-| Remove | Bullinger, Latin/German, GPT-3, medical prescriptions |
-| Scope | Match `docs/RESEARCH_SCOPE.md` |
+Prose source: `docs/CHAPTER_1_INTRODUCTION.md` (filled + DOCX via `scripts/rebuild_chapter1_docx.py`).
+
+| Section | Code / data reference |
+|---------|------------------------|
+| 1.3 Problem statement | English line-level HTR on IAM (`docs/RESEARCH_SCOPE.md`) |
+| 1.4 Aim and objectives | Evaluate + fine-tune TrOCR; CRNN/Tesseract baselines; Gradio demo |
+| 1.5 Methodology outline | `scripts/prepare_iam_lines.py`, `src/htr/train.py`, `src/htr/metrics.py` |
+| 1.5 Training hyperparameters | `experiments/iam_trocr_finetuned/train_log.json` |
+| 1.6 Scope | 6,482 / 976 / 2,915 lines from `Teklia/IAM-line` |
+| Excluded | GPT-3 / BERT / XLNet, architecture modification, precision / recall / F1, medical prescriptions, page-count framing |
 
 ## Chapter 2 — Literature Review
 
+Prose source: `docs/CHAPTER_2_LITERATURE_REVIEW.md` (filled + DOCX via `scripts/rebuild_chapter2_docx.py`).
+
 | Section | Source |
 |---------|--------|
-| TrOCR row in summary table | ViT encoder + BART decoder |
+| TrOCR row in summary table | ViT image encoder + BART text decoder |
 | Literature CER anchors | AttentionHTR 6.50%, Light Transformer 5.70%, GFCN 7.99% |
+| Light Transformer secondary figure | 4.76% labelled "with additional synthetic data" |
+| Accuracy figures (Balci, Manchala) | Reported as cited-study accuracy, not comparable with thesis CER |
 
 ## Chapter 3 — Methodology (design only)
 

@@ -4,7 +4,7 @@ This chapter presents the research design only. Measured CER and WER values are 
 
 ## 3.1 Introduction
 
-A sound empirical study of handwritten text recognition (HTR) requires more than the selection of a fashionable model: it requires an explicit account of the data, the preprocessing assumptions, the learning objectives, the evaluation criteria, and the comparisons against which claims will be judged. This chapter therefore sets out the methodological framework adopted for the present thesis. The research focuses on English line-level recognition using the IAM Handwriting Database and investigates transfer learning from a pretrained TrOCR transformer, whose Vision Transformer (ViT) encoder is paired with a BART text decoder. A convolutional recurrent network trained with Connectionist Temporal Classification (CRNN+CTC) provides a neural baseline of classical design, while Tesseract is retained as an optional classical optical character recognition reference when the runtime environment permits its use.
+A sound empirical study of handwritten text recognition (HTR) requires more than the selection of a fashionable model: it requires an explicit account of the data, the preprocessing assumptions, the learning objectives, the evaluation criteria, and the comparisons against which claims will be judged. This chapter therefore sets out the methodological framework adopted for the present thesis. The research focuses on English line-level recognition using the IAM Handwriting Database and investigates transfer learning from a pretrained TrOCR transformer, whose Vision Transformer (ViT) encoder is paired with a BART text decoder. A convolutional recurrent network trained with Connectionist Temporal Classification (CRNN+CTC) provides a lightweight neural baseline, while Tesseract supplies a classical optical character recognition reference on the same full test split.
 
 The chapter proceeds from dataset characterisation to preprocessing, model choice, metric definitions, and the planned experiment matrix. In keeping with conventional thesis organisation, no experimental scores are reported here; Chapter 4 is responsible for implementation detail, measured outcomes, and interpretive analysis.
 
@@ -42,13 +42,13 @@ TrOCR is adopted as the principal recognition architecture because it exemplifie
 
 To situate transformer performance against a familiar neural alternative, a CRNN with CTC is trained from scratch on the same IAM splits. The baseline is deliberately lightweight: convolutional feature extraction is followed by bidirectional recurrent modelling and CTC alignment. Its purpose is comparative clarity rather than architectural rivalry. A large performance gap, should it appear, would illuminate the benefit of large-scale pretrained transformers under matched data conditions.
 
-### 3.4.3 Tesseract as an optional classical baseline
+### 3.4.3 Tesseract as a classical baseline
 
-Tesseract, operated in line-oriented recognition mode, is included as a classical OCR reference. Because availability of the system binary can vary across machines, the methodology treats Tesseract as optional: when execution is impossible, Chapter 4 records a skipped status instead of fabricating scores. This rule preserves methodological honesty without forcing an incomplete software dependency to dictate the scientific narrative.
+Tesseract, operated in line-oriented recognition mode, is included as a classical OCR reference on the same full test split. The methodology anticipates that Chapter 4 will report measured CER/WER when the engine is available, thereby completing the classical baseline comparison without treating Tesseract as a handwriting-tuned specialist.
 
 ## 3.5 Experiment design and evaluation metrics
 
-The empirical programme is organised as a small matrix of complementary runs. Primary scientific claims rest on full-test evaluation of pretrained TrOCR, fine-tuned TrOCR, and the CRNN+CTC baseline. The optional Tesseract run and the demonstration subset support completeness and application discussion, respectively, but do not redefine the primary evidence base.
+The empirical programme is organised as a small matrix of complementary runs. Primary scientific claims rest on full-test evaluation of pretrained TrOCR, fine-tuned TrOCR, the CRNN+CTC baseline, and Tesseract. The demonstration subset supports application discussion only and does not redefine the primary evidence base.
 
 **Table 3.2 — Designed experiment matrix**
 
@@ -57,7 +57,7 @@ The empirical programme is organised as a small matrix of complementary runs. Pr
 | E1 | Pretrained TrOCR | Primary transformer baseline | Full test (n=2,915) |
 | E2 | Fine-tuned TrOCR | Adaptation experiment | Full test (n=2,915) |
 | E3 | CRNN+CTC | Neural baseline | Full test (n=2,915) |
-| E4 | Tesseract | Optional classical baseline | Full test (n=2,915) |
+| E4 | Tesseract | Classical baseline | Full test (n=2,915) |
 | E5 | Demonstration subset | Application support | Demo lines only |
 
 Two metrics dominate the evaluation. Character Error Rate (CER) quantifies the normalised edit distance at character level and remains the principal indicator of transcription fidelity in HTR. Word Error Rate (WER) provides a complementary word-level view of recognition difficulty. Both are computed after case-sensitive whitespace normalisation; transcriptions are not lowercased, so that the metric reflects orthographic detail rather than an artificially simplified string space. Corpus CER is defined as the ratio of total character edits to total reference characters across the evaluated set.
@@ -66,8 +66,10 @@ Engineering smoke tests with severely reduced sample limits may be used during d
 
 ## 3.6 Comparative framework
 
-Chapter 4 is designed to answer three comparative questions that follow directly from this methodology. First, does fine-tuning improve upon the pretrained TrOCR checkpoint when both are evaluated on the same full IAM test set? Second, how does TrOCR compare with the CRNN+CTC baseline under identical data and metric definitions? Third, how do the measured scores relate, at a contextual level only, to CER figures reported in selected IAM literature? The third comparison is deliberately cautious: published studies may differ in preprocessing, decoding, or split conventions, and are therefore cited for scale rather than treated as protocol-identical replications.
+Chapter 4 is designed to answer comparative questions that follow directly from this methodology. First, does fine-tuning improve upon the pretrained TrOCR checkpoint when both are evaluated on the same full IAM test set? Second, how does TrOCR compare with the lightweight CRNN+CTC baseline and with classical Tesseract under identical data and metric definitions? Third, how do the measured scores relate, at a contextual level only, to CER figures reported in selected IAM literature? The third comparison is deliberately cautious: published studies may differ in preprocessing, decoding, or split conventions, and are therefore cited for scale rather than treated as protocol-identical replications.
 
-## 3.7 Scope of the chapter
+## 3.7 Conclusion
 
-In summary, Chapter 3 fixes the scientific design of the thesis: English IAM line data, conservative preprocessing, TrOCR as the primary transfer-learning model, CRNN+CTC as a controlled neural baseline, optional classical OCR, and full-test CER/WER evaluation. The chapter contains no numeric experimental outcomes. Implementation choices actually used, measured results, and interpretive discussion are developed in Chapter 4.
+This chapter has established the methodological foundation of the thesis. The research design centres on English line-level recognition with the IAM Handwriting Database, using the official training, validation, and test partitions so that evaluation rests on a complete and publicly documented population. Preprocessing remains deliberately light, preserving the primacy of the recognition model rather than of custom image engineering. TrOCR is adopted as the principal transfer-learning system, while CRNN+CTC supplies a controlled lightweight neural baseline and Tesseract supplies a classical OCR reference. Character and word error rates, computed under a shared case-sensitive definition, constitute the criteria by which later claims will be judged.
+
+Equally important is what this chapter deliberately withholds. No measured CER or WER values are advanced here, because methodological specification must precede empirical reporting. The experiment matrix, comparative questions, and metric conventions fixed above are therefore the contract against which Chapter 4 will be read: implementation choices, logged hyperparameters, full-test results, and interpretive analysis belong to that subsequent chapter. In this sense, Chapter 3 does not merely describe tools; it defines the conditions of valid inference for the remainder of the study.

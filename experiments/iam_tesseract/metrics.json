@@ -1,6 +1,9 @@
 {
   "run_id": "iam_tesseract",
-  "status": "skipped",
-  "reason": "Tesseract binary not installed (sudo apt install tesseract-ocr)",
-  "backend": "tesseract"
+  "checkpoint": "tesseract",
+  "backend": "tesseract",
+  "n_samples": 2915,
+  "cer": 0.5633085220714087,
+  "wer": 0.9134626508811847,
+  "split_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\test"
 }

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Backup main thesis DOCX and append rebuilt Chapter 3/4 documents as siblings.
+"""Backup main thesis DOCX and rebuild every chapter document as a sibling file.
 
 Full OOXML merge into the original thesis is fragile; this script:
 1. Copies the main DOCX to .docx.bak
-2. Ensures CHAPTER_3/4 DOCX exist (rebuilds if missing)
+2. Rebuilds the Abstract and CHAPTER_1..5 DOCX from their builders
 3. Writes docs/THESIS_CHAPTERS_READY.md checklist for manual paste / supervisor review
 """
 
@@ -20,13 +20,28 @@ MAIN = REPO / (
     "Enhancing Handwritten Text Recognition Using Transformer Models "
     "Derived from Large Language Models.docx"
 )
-CH3_SCRIPT = REPO / "scripts" / "rebuild_chapter3_docx.py"
-CH4_SCRIPT = REPO / "scripts" / "rebuild_chapter4_docx.py"
-CH5_SCRIPT = REPO / "scripts" / "rebuild_chapter5_docx.py"
-CH3 = REPO / "docs" / "CHAPTER_3_METHODOLOGY.docx"
-CH4 = REPO / "docs" / "CHAPTER_4_IMPLEMENTATION_RESULTS.docx"
-CH5 = REPO / "docs" / "CHAPTER_5_CONCLUSION.docx"
-READY = REPO / "docs" / "THESIS_CHAPTERS_READY.md"
+SCRIPTS_DIR = REPO / "scripts"
+DOCS_DIR = REPO / "docs"
+
+# Ordered as the chapters appear in the thesis.
+BUILD_TARGETS = [
+    ("Abstract", SCRIPTS_DIR / "rebuild_abstract_docx.py", DOCS_DIR / "ABSTRACT.docx"),
+    ("Chapter 1", SCRIPTS_DIR / "rebuild_chapter1_docx.py", DOCS_DIR / "CHAPTER_1_INTRODUCTION.docx"),
+    (
+        "Chapter 2",
+        SCRIPTS_DIR / "rebuild_chapter2_docx.py",
+        DOCS_DIR / "CHAPTER_2_LITERATURE_REVIEW.docx",
+    ),
+    ("Chapter 3", SCRIPTS_DIR / "rebuild_chapter3_docx.py", DOCS_DIR / "CHAPTER_3_METHODOLOGY.docx"),
+    (
+        "Chapter 4",
+        SCRIPTS_DIR / "rebuild_chapter4_docx.py",
+        DOCS_DIR / "CHAPTER_4_IMPLEMENTATION_RESULTS.docx",
+    ),
+    ("Chapter 5", SCRIPTS_DIR / "rebuild_chapter5_docx.py", DOCS_DIR / "CHAPTER_5_CONCLUSION.docx"),
+]
+
+READY = DOCS_DIR / "THESIS_CHAPTERS_READY.md"
 
 
 def main() -> int:
@@ -37,10 +52,13 @@ def main() -> int:
     else:
         print(f"Main thesis DOCX not found at {MAIN} (skipping backup)")
 
-    for script in (CH3_SCRIPT, CH4_SCRIPT, CH5_SCRIPT):
+    for _, script, _ in BUILD_TARGETS:
         subprocess.check_call([sys.executable, str(script)], cwd=REPO)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    document_lines = [
+        f"- {label}: `{output.relative_to(REPO)}`" for label, _, output in BUILD_TARGETS
+    ]
     READY.write_text(
         "\n".join(
             [
@@ -51,31 +69,29 @@ def main() -> int:
                 "## Backups",
                 f"- Main DOCX backup: `{MAIN.name}.bak` (if main existed)",
                 "",
-                "## Replace / insert these chapter documents",
-                f"- Chapter 3: `{CH3.relative_to(REPO)}`",
-                f"- Chapter 4: `{CH4.relative_to(REPO)}`",
-                f"- Chapter 5: `{CH5.relative_to(REPO)}`",
+                "## Replace / insert these documents",
+                *document_lines,
                 "- Boundaries: `docs/CHAPTER_BOUNDARIES.md`",
+                "- Writing style: `docs/WRITING_STYLE.md`",
                 "- Filled rewrite: `docs/THESIS_REWRITE_FILLED.md`",
-                "- Filled Ch5: `docs/CHAPTER_5_CONCLUSION_FILLED.md`",
                 "- Appendix pointers: `docs/APPENDIX_CODE.md`",
                 "",
                 "## Before final submission",
-                "- Primary claims: E1–E3 full test (n=2915); E4 Tesseract optional; E5 demo qualitative only",
-                "- Re-run `scripts/fill_thesis_metrics.py` and rebuild Ch3/Ch4/Ch5 DOCX",
+                "- Primary claims: E1–E4 full test (n=2915); E5 demo qualitative only",
+                "- Re-run `scripts/fill_thesis_metrics.py` and rebuild every chapter DOCX",
                 "- Confirm every Ch4/Ch5 number matches `experiments/<run_id>/metrics.json`",
                 "- Confirm fine-tune narrative matches train_log.json (early stop; no CER gain vs Hub)",
                 "- Do not use smoke/synthetic CER as primary thesis numbers",
-                "- Paste/replace Chapters 3–5 from the rebuilt DOCX into the main thesis",
+                "- Confirm Ch1 objectives and Ch2 TrOCR row still match `docs/RESEARCH_SCOPE.md`",
+                "- Paste/replace the Abstract and Chapters 1–5 from the rebuilt DOCX into the main thesis",
                 "",
             ]
         ),
         encoding="utf-8",
     )
     print(f"Wrote {READY}")
-    print(f"Chapter 3 DOCX: {CH3}")
-    print(f"Chapter 4 DOCX: {CH4}")
-    print(f"Chapter 5 DOCX: {CH5}")
+    for label, _, output in BUILD_TARGETS:
+        print(f"{label} DOCX: {output}")
     return 0
 
 

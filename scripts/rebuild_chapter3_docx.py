@@ -42,8 +42,8 @@ def main() -> None:
         "whose Vision Transformer (ViT) encoder is paired with a BART text decoder. A "
         "convolutional recurrent network trained with Connectionist Temporal Classification "
         "(CRNN+CTC) provides a neural baseline of classical design, while Tesseract is "
-        "retained as an optional classical optical character recognition reference when "
-        "the runtime environment permits its use.",
+        "retained as a classical optical character recognition reference evaluated on the "
+        "same full test split.",
     )
     add_para(
         doc,
@@ -146,15 +146,13 @@ def main() -> None:
         "the benefit of large-scale pretrained transformers under matched data conditions.",
     )
 
-    doc.add_heading("3.4.3 Tesseract as an optional classical baseline", 2)
+    doc.add_heading("3.4.3 Tesseract as a classical baseline", 2)
     add_para(
         doc,
         "Tesseract, operated in line-oriented recognition mode, is included as a classical "
-        "OCR reference. Because availability of the system binary can vary across machines, "
-        "the methodology treats Tesseract as optional: when execution is impossible, Chapter 4 "
-        "records a skipped status instead of fabricating scores. This rule preserves "
-        "methodological honesty without forcing an incomplete software dependency to dictate "
-        "the scientific narrative.",
+        "OCR reference on the same full test split. Chapter 4 reports measured CER/WER when "
+        "the engine is available, completing the classical baseline comparison without "
+        "treating Tesseract as a handwriting-tuned specialist.",
     )
 
     doc.add_heading("3.5 Experiment design and evaluation metrics", 1)
@@ -162,9 +160,8 @@ def main() -> None:
         doc,
         "The empirical programme is organised as a small matrix of complementary runs. "
         "Primary scientific claims rest on full-test evaluation of pretrained TrOCR, "
-        "fine-tuned TrOCR, and the CRNN+CTC baseline. The optional Tesseract run and the "
-        "demonstration subset support completeness and application discussion, respectively, "
-        "but do not redefine the primary evidence base.",
+        "fine-tuned TrOCR, the CRNN+CTC baseline, and Tesseract. The demonstration subset "
+        "supports application discussion only and does not redefine the primary evidence base.",
     )
     doc.add_heading("Table 3.2 — Designed experiment matrix", 2)
     mtable = doc.add_table(rows=6, cols=4)
@@ -175,7 +172,7 @@ def main() -> None:
             ("E1", "Pretrained TrOCR", "Primary transformer baseline", "Full test (n=2,915)"),
             ("E2", "Fine-tuned TrOCR", "Adaptation experiment", "Full test (n=2,915)"),
             ("E3", "CRNN+CTC", "Neural baseline", "Full test (n=2,915)"),
-            ("E4", "Tesseract", "Optional classical baseline", "Full test (n=2,915)"),
+            ("E4", "Tesseract", "Classical baseline", "Full test (n=2,915)"),
             ("E5", "Demonstration subset", "Application support", "Demo lines only"),
         ]
     ):
@@ -203,25 +200,41 @@ def main() -> None:
     doc.add_heading("3.6 Comparative framework", 1)
     add_para(
         doc,
-        "Chapter 4 is designed to answer three comparative questions that follow directly "
-        "from this methodology. First, does fine-tuning improve upon the pretrained TrOCR "
+        "Chapter 4 is designed to answer comparative questions that follow directly from "
+        "this methodology. First, does fine-tuning improve upon the pretrained TrOCR "
         "checkpoint when both are evaluated on the same full IAM test set? Second, how does "
-        "TrOCR compare with the CRNN+CTC baseline under identical data and metric definitions? "
-        "Third, how do the measured scores relate, at a contextual level only, to CER figures "
-        "reported in selected IAM literature? The third comparison is deliberately cautious: "
-        "published studies may differ in preprocessing, decoding, or split conventions, and "
-        "are therefore cited for scale rather than treated as protocol-identical replications.",
+        "TrOCR compare with the lightweight CRNN+CTC baseline and with classical Tesseract "
+        "under identical data and metric definitions? Third, how do the measured scores "
+        "relate, at a contextual level only, to CER figures reported in selected IAM "
+        "literature? The third comparison is deliberately cautious: published studies may "
+        "differ in preprocessing, decoding, or split conventions, and are therefore cited "
+        "for scale rather than treated as protocol-identical replications.",
     )
 
-    doc.add_heading("3.7 Scope of the chapter", 1)
+    doc.add_heading("3.7 Conclusion", 1)
     add_para(
         doc,
-        "In summary, Chapter 3 fixes the scientific design of the thesis: English IAM line "
-        "data, conservative preprocessing, TrOCR as the primary transfer-learning model, "
-        "CRNN+CTC as a controlled neural baseline, optional classical OCR, and full-test "
-        "CER/WER evaluation. The chapter contains no numeric experimental outcomes. "
-        "Implementation choices actually used, measured results, and interpretive discussion "
-        "are developed in Chapter 4.",
+        "This chapter has established the methodological foundation of the thesis. The "
+        "research design centres on English line-level recognition with the IAM Handwriting "
+        "Database, using the official training, validation, and test partitions so that "
+        "evaluation rests on a complete and publicly documented population. Preprocessing "
+        "remains deliberately light, preserving the primacy of the recognition model rather "
+        "than of custom image engineering. TrOCR is adopted as the principal transfer-learning "
+        "system, while CRNN+CTC supplies a controlled lightweight neural baseline and "
+        "Tesseract supplies a classical OCR reference. Character and word error rates, "
+        "computed under a shared case-sensitive definition, constitute the criteria by which "
+        "later claims will be judged.",
+    )
+    add_para(
+        doc,
+        "Equally important is what this chapter deliberately withholds. No measured CER or "
+        "WER values are advanced here, because methodological specification must precede "
+        "empirical reporting. The experiment matrix, comparative questions, and metric "
+        "conventions fixed above are therefore the contract against which Chapter 4 will be "
+        "read: implementation choices, logged hyperparameters, full-test results, and "
+        "interpretive analysis belong to that subsequent chapter. In this sense, Chapter 3 "
+        "does not merely describe tools; it defines the conditions of valid inference for "
+        "the remainder of the study.",
     )
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

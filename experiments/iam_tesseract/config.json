@@ -1,0 +1,10 @@
+{
+  "run_id": "iam_tesseract",
+  "checkpoint": "tesseract",
+  "split_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\test",
+  "output_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\experiments",
+  "batch_size": 1,
+  "max_samples": null,
+  "backend": "tesseract",
+  "seed": 42
+}
