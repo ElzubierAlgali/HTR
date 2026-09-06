@@ -22,8 +22,10 @@ MAIN = REPO / (
 )
 CH3_SCRIPT = REPO / "scripts" / "rebuild_chapter3_docx.py"
 CH4_SCRIPT = REPO / "scripts" / "rebuild_chapter4_docx.py"
+CH5_SCRIPT = REPO / "scripts" / "rebuild_chapter5_docx.py"
 CH3 = REPO / "docs" / "CHAPTER_3_METHODOLOGY.docx"
 CH4 = REPO / "docs" / "CHAPTER_4_IMPLEMENTATION_RESULTS.docx"
+CH5 = REPO / "docs" / "CHAPTER_5_CONCLUSION.docx"
 READY = REPO / "docs" / "THESIS_CHAPTERS_READY.md"
 
 
@@ -35,7 +37,7 @@ def main() -> int:
     else:
         print(f"Main thesis DOCX not found at {MAIN} (skipping backup)")
 
-    for script in (CH3_SCRIPT, CH4_SCRIPT):
+    for script in (CH3_SCRIPT, CH4_SCRIPT, CH5_SCRIPT):
         subprocess.check_call([sys.executable, str(script)], cwd=REPO)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -52,15 +54,19 @@ def main() -> int:
                 "## Replace / insert these chapter documents",
                 f"- Chapter 3: `{CH3.relative_to(REPO)}`",
                 f"- Chapter 4: `{CH4.relative_to(REPO)}`",
+                f"- Chapter 5: `{CH5.relative_to(REPO)}`",
                 "- Boundaries: `docs/CHAPTER_BOUNDARIES.md`",
                 "- Filled rewrite: `docs/THESIS_REWRITE_FILLED.md`",
+                "- Filled Ch5: `docs/CHAPTER_5_CONCLUSION_FILLED.md`",
                 "- Appendix pointers: `docs/APPENDIX_CODE.md`",
                 "",
                 "## Before final submission",
-                "- Run GPU protocol (`docs/GPU_PROTOCOL.md`) so E1–E4 have n=2915",
-                "- Re-run `scripts/fill_thesis_metrics.py` and rebuild Ch4 DOCX",
-                "- Confirm every Ch4 number matches `experiments/<run_id>/metrics.json`",
+                "- Primary claims: E1–E3 full test (n=2915); E4 Tesseract optional; E5 demo qualitative only",
+                "- Re-run `scripts/fill_thesis_metrics.py` and rebuild Ch3/Ch4/Ch5 DOCX",
+                "- Confirm every Ch4/Ch5 number matches `experiments/<run_id>/metrics.json`",
+                "- Confirm fine-tune narrative matches train_log.json (early stop; no CER gain vs Hub)",
                 "- Do not use smoke/synthetic CER as primary thesis numbers",
+                "- Paste/replace Chapters 3–5 from the rebuilt DOCX into the main thesis",
                 "",
             ]
         ),
@@ -69,6 +75,7 @@ def main() -> int:
     print(f"Wrote {READY}")
     print(f"Chapter 3 DOCX: {CH3}")
     print(f"Chapter 4 DOCX: {CH4}")
+    print(f"Chapter 5 DOCX: {CH5}")
     return 0
 
 

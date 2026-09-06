@@ -1,49 +1,85 @@
 {
   "top_errors": [
     {
-      "pattern": "substitute:'T'->'e'",
-      "count": 2
+      "pattern": "delete:' '->''",
+      "count": 97
     },
     {
-      "pattern": "delete:'he '->''",
-      "count": 1
+      "pattern": "insert:''->'a'",
+      "count": 96
     },
     {
-      "pattern": "substitute:'j'->'e'",
-      "count": 1
+      "pattern": "delete:'e'->''",
+      "count": 61
     },
     {
-      "pattern": "delete:'umps'->''",
-      "count": 1
+      "pattern": "insert:''->'t'",
+      "count": 47
     },
     {
-      "pattern": "substitute:'H'->'e'",
-      "count": 1
+      "pattern": "delete:'t'->''",
+      "count": 46
     },
     {
-      "pattern": "delete:'an'->''",
-      "count": 1
+      "pattern": "insert:''->'h'",
+      "count": 37
     },
     {
-      "pattern": "substitute:'I'->'e'",
-      "count": 1
+      "pattern": "delete:'n'->''",
+      "count": 34
     },
     {
-      "pattern": "delete:'AM '->''",
-      "count": 1
+      "pattern": "delete:'a'->''",
+      "count": 31
     },
     {
-      "pattern": "delete:'ran'->''",
-      "count": 1
+      "pattern": "delete:'i'->''",
+      "count": 30
     },
     {
-      "pattern": "substitute:'C'->'e'",
-      "count": 1
+      "pattern": "delete:'s'->''",
+      "count": 29
     },
     {
-      "pattern": "delete:'har'->''",
-      "count": 1
+      "pattern": "delete:'o'->''",
+      "count": 28
+    },
+    {
+      "pattern": "delete:'r'->''",
+      "count": 23
+    },
+    {
+      "pattern": "delete:'h'->''",
+      "count": 20
+    },
+    {
+      "pattern": "delete:'e '->''",
+      "count": 20
+    },
+    {
+      "pattern": "delete:'d'->''",
+      "count": 17
+    },
+    {
+      "pattern": "delete:' t'->''",
+      "count": 16
+    },
+    {
+      "pattern": "delete:'u'->''",
+      "count": 14
+    },
+    {
+      "pattern": "delete:'m'->''",
+      "count": 14
+    },
+    {
+      "pattern": "substitute:'th'->'ta'",
+      "count": 13
+    },
+    {
+      "pattern": "delete:'in'->''",
+      "count": 12
     }
   ],
-  "total_mismatched_lines": 6
+  "total_mismatched_lines": 2915
 }

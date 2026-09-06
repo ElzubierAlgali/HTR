@@ -1,29 +1,85 @@
 {
   "top_errors": [
     {
-      "pattern": "delete:'The '->''",
-      "count": 1
+      "pattern": "substitute:' '->' '",
+      "count": 174
     },
     {
-      "pattern": "delete:'jumps'->''",
-      "count": 1
+      "pattern": "substitute:'e'->'e'",
+      "count": 99
     },
     {
-      "pattern": "delete:'Han'->''",
-      "count": 1
+      "pattern": "delete:' '->''",
+      "count": 88
     },
     {
-      "pattern": "delete:'IAM '->''",
-      "count": 1
+      "pattern": "substitute:'s'->'s'",
+      "count": 77
     },
     {
-      "pattern": "delete:'Tran'->''",
-      "count": 1
+      "pattern": "substitute:'h'->'h'",
+      "count": 75
     },
     {
-      "pattern": "delete:'Char'->''",
-      "count": 1
+      "pattern": "substitute:'a'->'a'",
+      "count": 71
+    },
+    {
+      "pattern": "substitute:'t'->'t'",
+      "count": 69
+    },
+    {
+      "pattern": "substitute:'o'->'o'",
+      "count": 67
+    },
+    {
+      "pattern": "substitute:'i'->'i'",
+      "count": 55
+    },
+    {
+      "pattern": "substitute:'r'->'r'",
+      "count": 51
+    },
+    {
+      "pattern": "insert:''->' '",
+      "count": 38
+    },
+    {
+      "pattern": "substitute:'n'->'n'",
+      "count": 37
+    },
+    {
+      "pattern": "delete:'e'->''",
+      "count": 34
+    },
+    {
+      "pattern": "substitute:'l'->'l'",
+      "count": 31
+    },
+    {
+      "pattern": "substitute:'f'->'f'",
+      "count": 30
+    },
+    {
+      "pattern": "substitute:'d'->'d'",
+      "count": 30
+    },
+    {
+      "pattern": "substitute:'w'->'w'",
+      "count": 28
+    },
+    {
+      "pattern": "delete:'a'->''",
+      "count": 27
+    },
+    {
+      "pattern": "delete:'o'->''",
+      "count": 26
+    },
+    {
+      "pattern": "delete:'i'->''",
+      "count": 24
     }
   ],
-  "total_mismatched_lines": 6
+  "total_mismatched_lines": 1656
 }

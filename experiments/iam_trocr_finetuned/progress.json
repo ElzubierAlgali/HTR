@@ -1,0 +1,8 @@
+{
+  "status": "completed",
+  "epochs_ran": 3,
+  "best_val_cer": 0.0137,
+  "wall_clock_sec": 319214.19519639015,
+  "device": "cuda",
+  "output_model_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\models\\iam_trocr_finetuned"
+}

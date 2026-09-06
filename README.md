@@ -5,10 +5,10 @@ Aligned implementation for thesis: **English IAM train/eval protocol** (pretrain
 ## Research story
 
 - **Primary:** Evaluate `microsoft/trocr-base-handwritten` on **full** IAM English test (n=2,915)
-- **Fine-tune:** TrOCR on IAM train/val → `models/iam_trocr_finetuned/`
-- **Baselines:** CRNN+CTC and Tesseract on the same full test split
-- **Demo eval:** Same pretrained model on IAM demo subset (`iam_demo`)
-- **Application:** Gradio demo with English IAM sample lines
+- **Fine-tune:** TrOCR on IAM train/val → `models/iam_trocr_finetuned/` (report logged CER honestly even if no gain vs Hub)
+- **Baselines:** CRNN+CTC on the same full test split; Tesseract optional when installed
+- **Demo:** Gradio application support only — not a primary CER source
+- **Contribution:** Aligned research-and-application pipeline (not a novel architecture / unmatched SOTA claim)
 
 See [docs/RESEARCH_SCOPE.md](docs/RESEARCH_SCOPE.md) for locked definitions.
 
@@ -46,6 +46,9 @@ python3 scripts/prepare_iam_demo_examples.py
 python3 scripts/run_train.py --config configs/iam_trocr_finetune.yaml
 python3 scripts/run_train_crnn.py --config configs/iam_crnn.yaml
 ```
+
+TrOCR training resumes automatically from `experiments/<run_id>/checkpoints/latest.pt`.  
+Use `--fresh` to wipe checkpoints, or `--no-resume` to ignore them. Progress: `experiments/<run_id>/progress.json`.
 
 Windows PowerShell (no bash required):
 

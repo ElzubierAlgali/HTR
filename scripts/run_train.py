@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Fine-tune TrOCR from a YAML config."""
+"""Fine-tune TrOCR from a YAML config (supports resume)."""
 
 from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -16,9 +17,11 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from htr.train import TrainConfig, run_training
 
 
-def load_config(path: Path) -> TrainConfig:
+def load_config(path: Path, *, resume: bool | None = None) -> TrainConfig:
     with open(path, encoding="utf-8") as f:
         raw = yaml.safe_load(f)
+
+    resume_flag = bool(raw.get("resume", True)) if resume is None else resume
 
     return TrainConfig(
         run_id=raw["run_id"],
@@ -36,19 +39,42 @@ def load_config(path: Path) -> TrainConfig:
         max_train_samples=raw.get("max_train_samples"),
         max_val_samples=raw.get("max_val_samples"),
         seed=int(raw.get("seed", 42)),
+        log_every_steps=int(raw.get("log_every_steps", 50)),
+        save_every_steps=int(raw.get("save_every_steps", 100)),
+        resume=resume_flag,
     )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Fine-tune TrOCR on IAM")
     parser.add_argument("--config", required=True, help="Path to YAML config")
+    parser.add_argument(
+        "--no-resume",
+        action="store_true",
+        help="Ignore existing checkpoints and start from base_checkpoint",
+    )
+    parser.add_argument(
+        "--fresh",
+        action="store_true",
+        help="Delete checkpoint dir for this run_id, then start fresh",
+    )
     args = parser.parse_args()
 
     config_path = Path(args.config)
     if not config_path.is_absolute():
         config_path = REPO_ROOT / config_path
 
-    log = run_training(load_config(config_path))
+    # Peek run_id for --fresh before full load
+    with open(config_path, encoding="utf-8") as f:
+        raw = yaml.safe_load(f)
+    run_id = raw["run_id"]
+    ckpt_dir = REPO_ROOT / raw.get("output_dir", "experiments") / run_id / "checkpoints"
+    if args.fresh and ckpt_dir.exists():
+        shutil.rmtree(ckpt_dir)
+        print(f"Removed {ckpt_dir}", flush=True)
+
+    resume = False if (args.no_resume or args.fresh) else None
+    log = run_training(load_config(config_path, resume=resume))
     print(json.dumps({k: v for k, v in log.items() if k != "history"}, indent=2, default=str))
 
 

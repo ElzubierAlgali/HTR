@@ -2,10 +2,8 @@
   "run_id": "iam_trocr_finetuned",
   "checkpoint": "models/iam_trocr_finetuned",
   "backend": "trocr",
-  "n_samples": 6,
-  "cer": 1.0,
-  "wer": 1.0,
-  "split_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\test",
-  "protocol": "smoke_synthetic",
-  "note": "Not for thesis primary numbers. Run docs/GPU_PROTOCOL.md."
+  "n_samples": 2915,
+  "cer": 0.04961987023842694,
+  "wer": 0.12463846361497821,
+  "split_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\test"
 }

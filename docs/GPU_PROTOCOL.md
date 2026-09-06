@@ -72,6 +72,31 @@ python scripts/extract_error_examples.py
 python scripts/fill_thesis_metrics.py
 ```
 
+### TrOCR resume / progress
+
+Training writes:
+
+- `experiments/iam_trocr_finetuned/progress.json` — live % / step / ETA
+- `experiments/iam_trocr_finetuned/checkpoints/latest.json` — resumable step/epoch meta
+- `experiments/iam_trocr_finetuned/checkpoints/model/` — HF weights snapshot
+- `experiments/iam_trocr_finetuned/checkpoints/optimizer.pt` — optional (skipped if disk &lt; ~4 GB free)
+- `models/iam_trocr_finetuned/` — best-by-val-CER export
+
+Keep several GB free on `C:` — a failed AdamW dump previously filled the disk.
+
+```powershell
+# Continue after interrupt (default)
+python scripts/run_train.py --config configs/iam_trocr_finetune.yaml
+
+# Discard checkpoints and start over
+python scripts/run_train.py --config configs/iam_trocr_finetune.yaml --fresh
+
+# Watch progress
+Get-Content experiments\iam_trocr_finetuned\progress.json
+```
+
+Config knobs: `log_every_steps`, `save_every_steps`, `resume` in `configs/iam_trocr_finetune.yaml`.
+
 ## 4. Copy artifacts back
 
 Bring to the thesis machine:

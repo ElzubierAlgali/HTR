@@ -1,11 +1,9 @@
 {
   "run_id": "iam_trocr_handwritten",
-  "checkpoint": "models/iam_trocr_finetuned",
+  "checkpoint": "microsoft/trocr-base-handwritten",
   "backend": "trocr",
-  "n_samples": 6,
-  "cer": 1.0,
-  "wer": 1.0,
-  "split_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\test",
-  "protocol": "smoke_synthetic",
-  "note": "Not for thesis primary numbers. Run docs/GPU_PROTOCOL.md."
+  "n_samples": 2915,
+  "cer": 0.047207737929387414,
+  "wer": 0.11638579306621419,
+  "split_dir": "C:\\Users\\Evasoft Tech\\Documents\\GitHub\\HTR\\data\\iam\\processed\\test"
 }

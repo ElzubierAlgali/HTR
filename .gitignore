@@ -166,6 +166,8 @@ data/iam/raw/
 data/iam/processed/
 data/iam/demo/
 *.pt
+*.safetensors
+experiments/**/checkpoints/
 models/bullinger-general-model/
 models/iam_trocr_finetuned/
 models/iam_crnn/

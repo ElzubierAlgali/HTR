@@ -1,5 +1,0 @@
-filename,reference,prediction,cer
-6_00_r1l2.png,"Gratiam et pacem a domino. Accepi tuas nuper literas, breves quidem, sed tamen mihi","Gratiam et pacem a domino. Accepi tuas nuper literas breves quidem, sed tamen mihi",0.012048192771084338
-6_00_r1l4.png,"et recte quidem, ne temere, ad quos legittime sim vocatus, deseram: non equidem","et recte quidem, ne temere ad quos legittime sim vocatus, deseram. Non equidem",0.0379746835443038
-6_00_r1l44.png,"zuͦ einem zeichen der dankbarkeit; so ich köndte und vermöchte, wolt","zuͦ einem zeichen der danckbarkeit, so ich köndte und vermöchte, wolt",0.029411764705882353
-7_00_r1l5.png,"gethon, wytters nichts zugeschriben, an solchem haben","thon, weyters nichts zugeschriben, an solchem haben",0.07547169811320754

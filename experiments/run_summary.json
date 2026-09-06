@@ -1,5 +1,7 @@
 {
-  "configs/iam_trocr_handwritten.yaml": "ok (cached)",
-  "configs/iam_demo.yaml": "ok",
-  "configs/iam_tesseract.yaml": "skipped"
+  "configs/iam_trocr_handwritten.yaml": "ok",
+  "configs/iam_trocr_finetuned.yaml": "ok",
+  "configs/iam_crnn.yaml": "ok",
+  "configs/iam_tesseract.yaml": "skipped",
+  "configs/iam_demo.yaml": "ok (cached)"
 }

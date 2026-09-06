@@ -15,6 +15,10 @@ JOBS = [
         REPO_ROOT / "docs" / "CHAPTER_4_IMPLEMENTATION_RESULTS.md",
         REPO_ROOT / "docs" / "CHAPTER_4_IMPLEMENTATION_RESULTS_FILLED.md",
     ),
+    (
+        REPO_ROOT / "docs" / "CHAPTER_5_CONCLUSION.md",
+        REPO_ROOT / "docs" / "CHAPTER_5_CONCLUSION_FILLED.md",
+    ),
 ]
 
 

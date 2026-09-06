@@ -56,7 +56,9 @@ Maps thesis sections to code artifacts for traceability.
 
 ## Chapter 5 — Conclusion
 
-Summarize full-test IAM English findings (pretrained vs fine-tuned vs CRNN vs Tesseract), Gradio deployment, limitations, future work.
+Source: `docs/CHAPTER_5_CONCLUSION.md` (filled + DOCX via rebuild script).
+
+Summarize full-test IAM English findings (pretrained vs fine-tuned vs CRNN), Gradio deployment, limitations, future work. Do not introduce new numeric claims beyond Chapter 4 artifacts.
 
 ## Appendices
 

@@ -4,7 +4,7 @@ This document locks the research story for the thesis and codebase. Every claim 
 
 ## Primary research question
 
-How well do **transformer-based HTR models** (pretrained and fine-tuned TrOCR) perform on the **English IAM Handwriting Database** benchmark compared to a CRNN+CTC baseline, classical OCR (Tesseract), and published literature?
+How well do **transformer-based HTR models** (pretrained and fine-tuned TrOCR) perform on the **English IAM Handwriting Database** benchmark compared to a CRNN+CTC baseline and published literature?
 
 ## Locked definitions
 
@@ -18,10 +18,19 @@ How well do **transformer-based HTR models** (pretrained and fine-tuned TrOCR) p
 | Loss (TrOCR) | Autoregressive cross-entropy — **not CTC** |
 | Loss (CRNN) | CTC |
 | Primary metrics | Character Error Rate (CER), Word Error Rate (WER) |
-| Measured baselines | CRNN+CTC and Tesseract 5.x on the same full IAM test split |
-| Literature baselines | Cited reported CER/WER only — no estimated numbers |
-| Application | Gradio demo on IAM English sample lines |
-| Primary eval sample | **n = 2,915** (full IAM test) for measured runs |
+| Primary measured runs | E1 pretrained TrOCR, E2 fine-tuned TrOCR, E3 CRNN+CTC on full IAM test |
+| Optional baseline | Tesseract 5.x when system binary is installed; otherwise recorded as skipped |
+| Literature baselines | Cited reported CER/WER only — no estimated numbers; protocol may differ |
+| Application | Gradio demo on IAM English sample lines (qualitative; not primary CER) |
+| Primary eval sample | **n = 2,915** (full IAM test) for E1–E3 |
+| Contribution framing | Aligned research-and-application pipeline — **not** a novel architecture or SOTA claim |
+
+## Honesty locks (match logged runs)
+
+- Fine-tuned TrOCR did **not** improve test CER vs Hub pretrained under the logged early-stopped run; report as negative/neutral.
+- CRNN+CTC is a **weak** lightweight baseline in this setup, not a competitive neural system.
+- Demo / smoke metrics must never appear as primary thesis numbers.
+- Do not claim matched state-of-the-art against literature without identical preprocess/splits.
 
 ## Out of scope
 
@@ -60,11 +69,11 @@ Uses the dataset publisher splits directly:
 
 | Run ID | Model | Dataset | Role |
 |--------|-------|---------|------|
-| `iam_trocr_handwritten` | `microsoft/trocr-base-handwritten` | IAM test (full, n=2,915) | Pretrained primary |
-| `iam_trocr_finetuned` | Local `models/iam_trocr_finetuned/` | IAM test (full, n=2,915) | Fine-tuned TrOCR |
+| `iam_trocr_handwritten` | `microsoft/trocr-base-handwritten` | IAM test (full, n=2,915) | **Primary** pretrained |
+| `iam_trocr_finetuned` | Local `models/iam_trocr_finetuned/` | IAM test (full, n=2,915) | **Primary** fine-tuned |
 | `iam_crnn` | CRNN+CTC | IAM test (full, n=2,915) | Neural baseline |
-| `iam_tesseract` | Tesseract | IAM test (full, n=2,915) | Classical baseline |
-| `iam_demo` | `microsoft/trocr-base-handwritten` | IAM demo (8 English lines) | Application qualitative |
+| `iam_tesseract` | Tesseract | IAM test (full, n=2,915) | Optional classical |
+| `iam_demo` | TrOCR (local or Hub) | IAM demo subset | Application qualitative |
 
 Primary YAMLs omit `max_samples` (full test). Smoke configs under `configs/smoke/` keep tiny limits for CPU checks. Thesis numbers must come from GPU full runs (`n=2,915`).
 
@@ -74,6 +83,12 @@ Every numeric result in the thesis must reference:
 
 ```
 experiments/<run_id>/metrics.json
+```
+
+Training hyperparameters must reference:
+
+```
+experiments/<run_id>/train_log.json
 ```
 
 Reproduce with:
@@ -88,4 +103,5 @@ python scripts/run_train_crnn.py --config configs/iam_crnn.yaml
 
 - **Chapter 3 (Methodology):** research design only — no result numbers
 - **Chapter 4 (Implementation and Results):** contribution, brief implementation, experiments, results, analysis
-- **Appendices:** full source code listings
+- **Chapter 5 (Conclusion):** summary of findings, contributions, limitations, future work
+- **Appendices:** source module pointers (`docs/APPENDIX_CODE.md`)
