@@ -15,7 +15,9 @@ Generated: 2026-09-06 19:44 UTC
 - Boundaries: `docs/CHAPTER_BOUNDARIES.md`
 - Writing style: `docs/WRITING_STYLE.md`
 - Filled rewrite: `docs/THESIS_REWRITE_FILLED.md`
-- Appendix pointers: `docs/APPENDIX_CODE.md`
+- Appendix pointers: `docs/APPENDIX_CODE.md` / `docs/APPENDIX.docx`
+- References: `docs/REFERENCES.md` / `docs/REFERENCES.docx`
+- Combined appendix + references: `docs/APPENDIX_AND_REFERENCES.docx`
 
 ## Before final submission
 - Primary claims: E1–E4 full test (n=2915); E5 demo qualitative only

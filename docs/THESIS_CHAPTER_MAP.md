@@ -73,7 +73,9 @@ Summarize full-test IAM English findings (pretrained vs fine-tuned vs CRNN), Gra
 
 | Content | Source |
 |---------|--------|
-| Code listings | `docs/APPENDIX_CODE.md` |
+| Code listings | `docs/APPENDIX_CODE.md` / `docs/APPENDIX.docx` |
+| References | `docs/REFERENCES.md` / `docs/REFERENCES.docx` |
+| Combined | `docs/APPENDIX_AND_REFERENCES.docx` |
 
 ## Aligned thesis text
 
